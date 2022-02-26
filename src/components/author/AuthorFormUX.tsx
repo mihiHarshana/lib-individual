@@ -18,7 +18,7 @@ const AuthorFormUX = () => {
           <Form className="ms-5">
             <Form.Group className="mb-3" controlId="textAuthorName">
               <Form.Label className="author-label">Name of the author</Form.Label>
-              <Form.Control type="text" className="author-field" />
+              <Form.Control type="text" className="author-field" required />
             </Form.Group>
             <Button  type="submit" className="create-button float-end">
               Create
