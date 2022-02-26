@@ -6,11 +6,11 @@ const AuthorFormUX = () => {
   return (
     <React.Fragment>
       <Row>
-        <Col xs={9} md={7}className="mt-4">
+        <Col xs={8} md={9}className="mt-4 ">
           <h3>Create Author </h3>
         </Col>
-        <Col xs={2} md={2} className="mt-4" >
-          <XCircle  />
+        <Col xs={4} md={1} className="mt-4 text-end" >
+          <XCircle className="c-circle" />
         </Col>
       </Row>
       <Row>

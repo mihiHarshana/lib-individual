@@ -19,13 +19,14 @@ const Author: React.FC<AuthorProps> = (props) => {
   return (
     <React.Fragment>
       <Row className="author me-0">
-        <Col xs={8} md={10}>
+        <Col xs={8} md={9} >
           {props.author.name} {props.index}
         </Col>
 
         <Col xs={4} md={2}>
-          <Edit className="text-warning edit py-1 my-1" />
-          <Trash2 className="text-danger trash2  py-1"/>
+
+          <Trash2 className="text-danger float-end trash2  py-1 py-0"/>
+          <Edit className="text-warning float-end edit py-1 px-md-0 " />
         </Col>
       </Row>
 
