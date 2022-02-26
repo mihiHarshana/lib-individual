@@ -13,21 +13,20 @@ const BookFormUx = () => {
   return (
     <React.Fragment>
       <Row>
-        <Col xs={8}  className="mt-3 ms-md-3">
+        <Col xs={8} md={9}  className="mt-3 ms-md-3">
           <h3>Create Book</h3>
         </Col>
-        <Col xs={2}  className="mt-3">
-          <XCircle className="c-circle"/>
+        <Col xs={4} md={1}  className="mt-3 pe-md-4 text-end">
+          <XCircle className="c-circle "/>
         </Col>
       </Row>
       <Row>
-        <Col xs={10} className="mt-3 ms-md-3">
-          <Form className="ms-5">
+        <Col xs={12} md={10}>
+          <Form className="ms-md-5">
             <Form.Group className="mb-3 " controlId="titleOfTheBook">
               <Form.Label className="book-label">Title of the Book</Form.Label>
               <Form.Control type="text"  className="books-field" />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="priceOfTheBook">
               <Form.Label  className="book-label">Price</Form.Label>
               <Form.Control type="text"  className="books-field"  />
@@ -40,11 +39,8 @@ const BookFormUx = () => {
               Create
             </Button>
           </Form>
-
         </Col>
-
       </Row>
-
     </React.Fragment>
   )
 
