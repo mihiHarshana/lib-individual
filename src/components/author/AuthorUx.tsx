@@ -3,6 +3,7 @@ import {Col, Row} from "react-bootstrap";
 import Author from "./Author";
 import {IAuthor} from "../../LibraryTypes";
 import {Plus} from "react-feather";
+import AuthorFormUX from "./AuthorFormUX";
 
 const AuthorUx: React.FC = () => {
   const author: IAuthor[] = [
@@ -24,11 +25,13 @@ const AuthorUx: React.FC = () => {
         }
         </Col>
 
-        <Col xs={4} className="mt-3 px-1">
+        <Col xs={4} md={4} className="mt-3 px-1">
           <Plus className="plus" />
           Add Author
         </Col>
-
+        <Col xs={12} md={10}>
+          <AuthorFormUX />
+        </Col>
       </Row>
     </React.Fragment>
 
