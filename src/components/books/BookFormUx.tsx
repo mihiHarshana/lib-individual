@@ -25,15 +25,15 @@ const BookFormUx = () => {
           <Form className="ms-md-5">
             <Form.Group className="mb-3 " controlId="titleOfTheBook">
               <Form.Label className="book-label">Title of the Book</Form.Label>
-              <Form.Control type="text"  className="books-field" />
+              <Form.Control type="text"  className="books-field" required/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="priceOfTheBook">
               <Form.Label  className="book-label">Price</Form.Label>
-              <Form.Control type="text"  className="books-field"  />
+              <Form.Control type="text"  className="books-field"  required/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="form">
               <Form.Label  className="book-label">Author</Form.Label>
-              <Select options={options} isClearable></Select>
+              <Select options={options} isClearable ></Select>
             </Form.Group>
             <Button variant="primary" type="submit" className="create-button float-end">
               Create

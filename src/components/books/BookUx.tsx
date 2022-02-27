@@ -15,7 +15,7 @@ const BookUx: React.FC = () => {
 
     <React.Fragment>
       <Row>
-        <Col xs={12}  className="ms-md-3">
+        <Col xs={12} md={11}  className="ms-md-3">
           <h2>Book</h2>
           <hr className="mt-2 line"/>
         </Col>
