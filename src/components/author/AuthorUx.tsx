@@ -13,7 +13,7 @@ const AuthorUx: React.FC = () => {
   return (
 
     <React.Fragment>
-      <Row>
+      <Row className="mx-5">
         <Col xs={12} md={11}>
           <h2>Author</h2>
           <hr className="mt-2 line"/>

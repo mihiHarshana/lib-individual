@@ -33,7 +33,7 @@ const BookFormUx = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="form">
               <Form.Label  className="book-label">Author</Form.Label>
-              <Select options={options} isClearable ></Select>
+              <Select options={options} isClearable></Select>
             </Form.Group>
             <Button variant="primary" type="submit" className="create-button float-end">
               Create
