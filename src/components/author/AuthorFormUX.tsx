@@ -15,7 +15,7 @@ const AuthorFormUX = () => {
       </Row>
       <Row>
         <Col xs={12} md={10}>
-          <Form className="ms-5">
+          <Form className="ms-md-5">
             <Form.Group className="mb-3" controlId="textAuthorName">
               <Form.Label className="author-label">Name of the author</Form.Label>
               <Form.Control type="text" className="author-field" required />

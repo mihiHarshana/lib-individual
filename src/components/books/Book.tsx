@@ -29,13 +29,11 @@ function onhandleClick() {
 const Book: React.FC<BookProps> = (props) => {
   return (
     <React.Fragment>
-      <Row className="book me-0">
-        <Col xs={8} md={9} >
+      <Row className="me-0 book">
+        <Col xs={8} md={9}  >
           {props.book.name} {props.index}
         </Col>
-
         <Col xs={4} md={2}>
-
           <Trash2 className="text-danger float-end trash2  py-1 py-0" onClick={onhandleClick}/>
           <Edit className="text-warning float-end edit py-1 px-md-0 " />
         </Col>

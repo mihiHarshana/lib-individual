@@ -3,6 +3,7 @@ import {Col, Row} from "react-bootstrap";
 import Book from "./Book";
 import {IBook,IAuthor} from "../../LibraryTypes";
 import {Plus} from "react-feather";
+import BookFormUx from "./BookFormUx";
 
 const BookUx: React.FC = () => {
   const books: IBook[] = [
@@ -14,11 +15,11 @@ const BookUx: React.FC = () => {
 
     <React.Fragment>
       <Row>
-        <Col xs={12} md={11} className="ms-md-3">
+        <Col xs={12} md={11}  className="ms-md-3">
           <h2>Book</h2>
           <hr className="mt-2 line"/>
         </Col>
-        <Col xs={12} md={12} className="ms-md-3"> {
+        <Col xs={12}  className="ms-md-3"> {
           books.map((book: IBook, index: number) =>
             <Book book={book} key={index} index={index}/>
           )
@@ -29,8 +30,8 @@ const BookUx: React.FC = () => {
           <Plus className="plus" />
           Add Book
         </Col>
-        <Col xs={12} >
-
+        <Col xs={12}  >
+          <BookFormUx />
         </Col>
       </Row>
     </React.Fragment>
