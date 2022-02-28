@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import Author from "./Author";
 import {IAuthor} from "../../LibraryTypes";
@@ -10,6 +10,16 @@ const AuthorUx: React.FC = () => {
     {name: "Mihindu", index: 1},
     {name: "Harshana", index: 2}
   ]
+
+  const [authorList, setAuthorList] = useState <IAuthor[]>(author);
+
+  const createAuthor=(author1: IAuthor) =>  {
+    const newAuthorarray: IAuthor [] = authorList.slice();
+    newAuthorarray.splice(authorList.length, 1,author1);
+    setAuthorList(newAuthorarray);
+
+  }
+
   return (
 
     <React.Fragment>
@@ -19,7 +29,7 @@ const AuthorUx: React.FC = () => {
           <hr className="mt-2 line"/>
         </Col>
         <Col xs={12} md={12}> {
-          author.map((author: IAuthor, index: number) =>
+          authorList.map((author: IAuthor, index: number) =>
             <Author author={author} key={index} index={index}/>
           )
         }
@@ -30,7 +40,7 @@ const AuthorUx: React.FC = () => {
           Add Author
         </Col>
         <Col xs={12} >
-          <AuthorFormUX />
+          <AuthorFormUX createAuthor={createAuthor}/>
         </Col>
       </Row>
     </React.Fragment>
