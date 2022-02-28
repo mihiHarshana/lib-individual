@@ -2,6 +2,7 @@ import React, {ReactEventHandler, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor} from "../../LibraryTypes";
+import Swal from "sweetalert2";
 
 type AuthorFormUxProps = {
   createAuthor: (author: IAuthor) =>void
@@ -24,6 +25,11 @@ const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
     newAuthor = {name:author, index:1  }
     props.createAuthor(newAuthor);
     setAuthor("");
+
+    Swal.fire(
+      'Author ' + newAuthor.name +  ' created successfully ',
+      'success'
+    )
   }
 
 
