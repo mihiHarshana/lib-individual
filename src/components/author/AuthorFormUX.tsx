@@ -1,4 +1,4 @@
-import React, {ReactEventHandler, useState} from "react";
+import React, {FormEvent, ReactEventHandler, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor} from "../../LibraryTypes";
@@ -13,10 +13,9 @@ const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuthor(event.target.value);
-
   };
 
-  const onCreateAuthorClick = (event: any) => {
+  const handleAuthorCreate = (event: FormEvent) => {
     event.preventDefault();
     if (!author ) {
       return;
@@ -32,7 +31,6 @@ const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
     )
   }
 
-
   return (
     <React.Fragment>
       <Row>
@@ -45,7 +43,7 @@ const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
       </Row>
       <Row>
         <Col xs={12} md={10}>
-          <Form className="ms-md-5" onClick={onCreateAuthorClick}>
+          <Form className="ms-md-5" onSubmit={handleAuthorCreate}>
             <Form.Label className="author-label">Name of the author</Form.Label>
             <Form.Control
               type="text"
@@ -61,7 +59,6 @@ const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
         </Col>
       </Row>
     </React.Fragment>
-
   )
 }
 

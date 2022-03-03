@@ -5,7 +5,11 @@ import {IAuthor} from "../../LibraryTypes";
 import {Plus} from "react-feather";
 import AuthorFormUX from "./AuthorFormUX";
 
-const AuthorUx: React.FC = () => {
+type AuthorUxProps = {
+  /*deleteAuthor: (author: IAuthor) =>void*/
+}
+
+const AuthorUx: React.FC<AuthorUxProps> = (props) => {
   const author: IAuthor[] = [
     {name: "Mihindu", index: 1},
     {name: "Harshana", index: 2}
@@ -20,6 +24,12 @@ const AuthorUx: React.FC = () => {
 
   }
 
+  const onDeleteAuthorClick = (event: any) => {
+    console.log('Delete Author')
+  }
+
+
+
   return (
 
     <React.Fragment>
@@ -30,7 +40,7 @@ const AuthorUx: React.FC = () => {
         </Col>
         <Col xs={12} md={12}> {
           authorList.map((author: IAuthor, index: number) =>
-            <Author author={author} key={index} index={index}/>
+            <Author key={index} index={index + 1} author={author}  />
           )
         }
         </Col>

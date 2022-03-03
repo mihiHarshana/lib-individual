@@ -10,7 +10,9 @@ type AuthorProps = {
 
 }
 
-function onhandleClick() {
+
+
+function onHandleDeleteClick() {
   Swal.fire({
     title: 'Do you want to save the changes?',
     showDenyButton:true,
@@ -19,7 +21,7 @@ function onhandleClick() {
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
-      //Actions to be performed here
+
     } else if (result.isDenied) {
       //Action to be performed here
     }
@@ -31,12 +33,12 @@ const Author: React.FC<AuthorProps> = (props) => {
     <React.Fragment>
       <Row className="author me-0">
         <Col xs={8} md={9} >
-          {props.author.name} {props.index}
+          {props.index} {props.author.name}
         </Col>
 
         <Col xs={4} md={2}>
 
-          <Trash2 className="text-danger float-end trash2  py-1 py-0" onClick={onhandleClick}/>
+          <Trash2 className="text-danger float-end trash2  py-1 py-0" onClick={onHandleDeleteClick}/>
           <Edit className="text-warning float-end edit py-1 px-md-0 " />
         </Col>
       </Row>
