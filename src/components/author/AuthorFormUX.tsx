@@ -1,8 +1,36 @@
-import React from "react";
+import React, {FormEvent, ReactEventHandler, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
+import {IAuthor} from "../../LibraryTypes";
+import Swal from "sweetalert2";
 
-const AuthorFormUX = () => {
+type AuthorFormUxProps = {
+  createAuthor: (author: IAuthor) =>void
+}
+
+const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
+  const [author, setAuthor] = useState("");
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAuthor(event.target.value);
+  };
+
+  const handleAuthorCreate = (event: FormEvent) => {
+    event.preventDefault();
+    if (!author ) {
+      return;
+    }
+    let newAuthor:IAuthor;
+    newAuthor = {name:author, index:1  }
+    props.createAuthor(newAuthor);
+    setAuthor("");
+
+    Swal.fire(
+      'Author ' + newAuthor.name +  ' created successfully ',
+      'success'
+    )
+  }
+
   return (
     <React.Fragment>
       <Row>
@@ -15,19 +43,22 @@ const AuthorFormUX = () => {
       </Row>
       <Row>
         <Col xs={12} md={10}>
-          <Form className="ms-md-5">
-            <Form.Group className="mb-3" controlId="textAuthorName">
-              <Form.Label className="author-label">Name of the author</Form.Label>
-              <Form.Control type="text" className="author-field" required />
-            </Form.Group>
-            <Button  type="submit" className="create-button float-end">
+          <Form className="ms-md-5" onSubmit={handleAuthorCreate}>
+            <Form.Label className="author-label">Name of the author</Form.Label>
+            <Form.Control
+              type="text"
+              className="author-field"
+              required
+              value={author}
+              onChange={handleChange}
+              />
+            <Button  type="submit" className="create-button float-end" >
               Create
             </Button>
           </Form>
         </Col>
       </Row>
     </React.Fragment>
-
   )
 }
 
