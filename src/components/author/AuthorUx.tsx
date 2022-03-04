@@ -33,12 +33,12 @@ const AuthorUx: React.FC<AuthorUxProps> = (props) => {
   return (
 
     <React.Fragment>
-      <Row className="mx-5">
-        <Col xs={12} md={11}>
+      <Row>
+        <Col xs={12}>
           <h2>Author</h2>
           <hr className="mt-2 line"/>
         </Col>
-        <Col xs={12} md={12}> {
+        <Col xs={12}> {
           authorList.map((author: IAuthor, index: number) =>
             <Author key={index} index={index + 1} author={author}  />
           )
@@ -49,7 +49,7 @@ const AuthorUx: React.FC<AuthorUxProps> = (props) => {
           <Plus className="plus" />
           Add Author
         </Col>
-        <Col xs={12} >
+        <Col xs={12} md={10}  >
           <AuthorFormUX createAuthor={createAuthor}/>
         </Col>
       </Row>
