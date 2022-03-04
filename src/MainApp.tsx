@@ -14,7 +14,7 @@ const MainApp = () => {
         <Col xs={12} lg={6}>
           <BookUx />
         </Col>
-        <Col xs={12} lg={6}>
+        <Col xs={12} lg={6} className="px-md-5">
           <AuthorUx />
         </Col>
       </Row>

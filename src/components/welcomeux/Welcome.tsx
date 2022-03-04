@@ -11,7 +11,7 @@ const Welcome = () => {
       <Col xs={12} className="p-0">
         <Image className="img" src={WelcomeImage} />
       </Col>
-      <Col xs={12} md={11} className="text-end  test1">
+      <Col xs={12} className="text-end  test1  px-4">
         Photo Credits <a href="https://unsplash.com/photos/ajE5goOGzZc" >Anna Hunko</a>
       </Col>
     </Row>

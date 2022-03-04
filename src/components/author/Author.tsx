@@ -7,10 +7,7 @@ import Swal from 'sweetalert2'
 type AuthorProps = {
   author: IAuthor;
   index: number;
-
 }
-
-
 
 function onHandleDeleteClick() {
   Swal.fire({
@@ -31,12 +28,12 @@ function onHandleDeleteClick() {
 const Author: React.FC<AuthorProps> = (props) => {
   return (
     <React.Fragment>
-      <Row className="author me-0">
-        <Col xs={8} md={9} >
+      <Row className="author">
+        <Col xs={8} md={9} className="py-1" >
           {props.index} {props.author.name}
         </Col>
 
-        <Col xs={4} md={2}>
+        <Col xs={4} md={3}>
 
           <Trash2 className="text-danger float-end trash2  py-1 py-0" onClick={onHandleDeleteClick}/>
           <Edit className="text-warning float-end edit py-1 px-md-0 " />
