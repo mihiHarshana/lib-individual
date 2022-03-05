@@ -13,10 +13,10 @@ const BookFormUx = () => {
   return (
     <React.Fragment>
       <Row>
-        <Col xs={8} md={9}  className="mt-3 ms-md-3">
+        <Col xs={8} md={9}  className="mt-3 ms-md-1">
           <h3>Create Book</h3>
         </Col>
-        <Col xs={4} md={1}  className="mt-3 pe-md-4 text-end">
+        <Col xs={4} md={1}  className="mt-3 pe-md-3 text-end">
           <XCircle className="c-circle "/>
         </Col>
       </Row>
@@ -31,11 +31,11 @@ const BookFormUx = () => {
               <Form.Label  className="book-label">Price</Form.Label>
               <Form.Control type="text"  className="books-field"  required/>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="form">
+            <Form.Group className="mb-1" controlId="form">
               <Form.Label  className="book-label">Author</Form.Label>
               <Select options={options} isClearable></Select>
             </Form.Group>
-            <Button variant="primary" type="submit" className="create-button float-end">
+            <Button variant="primary" type="submit" className="create-button float-end mt-3 px-4 py-1">
               Create
             </Button>
           </Form>
@@ -43,6 +43,6 @@ const BookFormUx = () => {
       </Row>
     </React.Fragment>
   )
-
 }
+
 export default BookFormUx

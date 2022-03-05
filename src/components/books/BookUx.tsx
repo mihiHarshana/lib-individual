@@ -12,21 +12,19 @@ const BookUx: React.FC = () => {
     {name: "book3", index: 3, price: 300 },
   ]
   return (
-
     <React.Fragment>
       <Row>
-        <Col xs={12} md={11}  className="ms-md-3">
+        <Col xs={12}  className="ms-md-1">
           <h2>Book</h2>
           <hr className="mt-2 line"/>
         </Col>
-        <Col xs={12}  className="ms-md-3"> {
+        <Col xs={12}  className="ms-md-2 ms-1"> {
           books.map((book: IBook, index: number) =>
             <Book book={book} key={index} index={index}/>
           )
         }
         </Col>
-
-        <Col xs={4} md={4} className="mt-3 px-1 ms-md-3">
+        <Col xs={4} md={4} className="mt-3 px-1 ms-md-1">
           <Plus className="plus" />
           Add Book
         </Col>
@@ -35,7 +33,7 @@ const BookUx: React.FC = () => {
         </Col>
       </Row>
     </React.Fragment>
-
   )
 }
+
 export default BookUx
