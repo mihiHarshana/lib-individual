@@ -1,0 +1,17 @@
+.img {
+  width: 100%;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+
+}
+
+@media (max-width: 575.98px) {
+  .test1 {
+    font-size: xx-small;
+  }
+  h1 {
+    font-size: small;
+  }
+}
