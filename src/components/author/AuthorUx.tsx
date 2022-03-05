@@ -5,18 +5,13 @@ import {IAuthor} from "../../LibraryTypes";
 import {Plus} from "react-feather";
 import AuthorFormUX from "./AuthorFormUX";
 
-type AuthorUxProps = {
-  /*deleteAuthor: (author: IAuthor) =>void*/
-}
-
-const AuthorUx: React.FC<AuthorUxProps> = (props) => {
+const AuthorUx: React.FC = () => {
   const author: IAuthor[] = [
     {name: "Mihindu", index: 1},
     {name: "Harshana", index: 2}
   ]
 
   const [authorList, setAuthorList] = useState <IAuthor[]>(author);
-
   const createAuthor=(author1: IAuthor) =>  {
     const newAuthorarray: IAuthor [] = authorList.slice();
     newAuthorarray.splice(authorList.length, 1,author1);
@@ -24,14 +19,12 @@ const AuthorUx: React.FC<AuthorUxProps> = (props) => {
 
   }
 
-  const onDeleteAuthorClick = (event: any) => {
-    console.log('Delete Author')
+  const onDeleteAuthorClick = (index: number) => {
+    const newAuthorarray: IAuthor [] = authorList.slice();
+    newAuthorarray.splice(index-1, 1);
+    setAuthorList(newAuthorarray);
   }
-
-
-
   return (
-
     <React.Fragment>
       <Row>
         <Col xs={12}>
@@ -40,7 +33,7 @@ const AuthorUx: React.FC<AuthorUxProps> = (props) => {
         </Col>
         <Col xs={12}> {
           authorList.map((author: IAuthor, index: number) =>
-            <Author key={index} index={index + 1} author={author}  />
+            <Author key={index} index={index + 1} author={author} onDeleteAuthorClick={onDeleteAuthorClick}   />
           )
         }
         </Col>
@@ -57,4 +50,4 @@ const AuthorUx: React.FC<AuthorUxProps> = (props) => {
 
   )
 }
-export default AuthorUx
+export default AuthorUx;
