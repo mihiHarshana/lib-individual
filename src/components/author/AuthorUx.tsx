@@ -24,6 +24,10 @@ const AuthorUx: React.FC = () => {
     newAuthorarray.splice(index-1, 1);
     setAuthorList(newAuthorarray);
   }
+
+  const onHandleEditClick = () => {
+    console.log ("Edit clicked")
+  }
   return (
     <React.Fragment>
       <Row>
@@ -33,7 +37,9 @@ const AuthorUx: React.FC = () => {
         </Col>
         <Col xs={12}> {
           authorList.map((author: IAuthor, index: number) =>
-            <Author key={index} index={index + 1} author={author} onDeleteAuthorClick={onDeleteAuthorClick}   />
+            <Author key={index} index={index + 1} author={author} onDeleteAuthorClick={onDeleteAuthorClick}
+                    onHandleEditClick={onHandleEditClick}
+            />
           )
         }
         </Col>

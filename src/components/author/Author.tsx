@@ -7,7 +7,8 @@ import Swal from 'sweetalert2'
 type AuthorProps = {
   author: IAuthor;
   index: number;
-  onDeleteAuthorClick: (index: number) => void
+  onDeleteAuthorClick: (index: number) => void;
+  onHandleEditClick: () =>void
 }
 
 const Author: React.FC<AuthorProps> = (props) => {
@@ -26,6 +27,21 @@ const Author: React.FC<AuthorProps> = (props) => {
       }
     })
   }
+
+  function onHandleEditClick() {
+    Swal.fire({
+      title: 'Are you sure to edit the details ?',
+      showDenyButton:true,
+      confirmButtonText: 'Edit',
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+      } else if (result.isDenied) {
+        //Action to be performed here
+      }
+    })
+  }
   return (
     <React.Fragment>
       <Row className="author">
@@ -34,7 +50,7 @@ const Author: React.FC<AuthorProps> = (props) => {
         </Col>
         <Col xs={4} md={3}>
           <Trash2 className="text-danger float-end trash2  py-1 py-0" onClick={onHandleDeleteClick}/>
-          <Edit className="text-warning float-end edit py-1 px-md-0 " />
+          <Edit className="text-warning float-end edit py-1 px-md-0" onClick={onHandleEditClick} />
         </Col>
       </Row>
 
