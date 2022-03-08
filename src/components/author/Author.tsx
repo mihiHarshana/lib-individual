@@ -15,7 +15,7 @@ const Author: React.FC<AuthorProps> = (props) => {
 
   function onHandleDeleteClick() {
     Swal.fire({
-      title: 'Do you want to save the changes?',
+      title: 'Do you want to delete the author - ' + props.author.name + ' ? ',
       showDenyButton:true,
       confirmButtonText: 'Delete',
       denyButtonText: `Cancel`,
