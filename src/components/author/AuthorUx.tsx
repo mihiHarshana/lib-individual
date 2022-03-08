@@ -6,10 +6,7 @@ import {Plus} from "react-feather";
 import AuthorFormUX from "./AuthorFormUX";
 
 const AuthorUx: React.FC = () => {
-  const author: IAuthor[] = [
-    {name: "Mihindu", index: 1},
-    {name: "Harshana", index: 2}
-  ]
+  const author: IAuthor[] = []
 
   const [authorList, setAuthorList] = useState <IAuthor[]>(author);
   const createAuthor=(author1: IAuthor) =>  {
@@ -28,12 +25,29 @@ const AuthorUx: React.FC = () => {
   const onHandleEditClick = () => {
     console.log ("Edit clicked")
   }
+
+  function ConditionalComponent() {
+    console.log(authorList.length)
+    const div = authorList.length == 0 ?
+      <p className="fst-italic text-muted small"> No authors listed here.</p>
+      : null;
+
+    return (
+      <div>
+        {div}
+      </div>
+
+    )
+  }
   return (
     <React.Fragment>
       <Row>
         <Col xs={12}>
           <h2>Author</h2>
           <hr className="mt-2 line"/>
+          {ConditionalComponent()}
+
+
         </Col>
         <Col xs={12}> {
           authorList.map((author: IAuthor, index: number) =>
