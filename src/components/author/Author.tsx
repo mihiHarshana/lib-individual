@@ -45,15 +45,14 @@ const Author: React.FC<AuthorProps> = (props) => {
   return (
     <React.Fragment>
       <Row className="author">
-        <Col xs={8} md={9} className="py-1" >
+        <Col xs={8} md={9} className="p-1" >
           {props.index} {props.author.name}
         </Col>
-        <Col xs={4} md={3}>
-          <Trash2 className="text-danger float-end trash2  py-1 py-0" onClick={onHandleDeleteClick}/>
+        <Col xs={4} md={3} className="p-1">
+          <Trash2 className="text-danger float-end trash2  py-1 " onClick={onHandleDeleteClick}/>
           <Edit className="text-warning float-end edit py-1 px-md-0" onClick={onHandleEditClick} />
         </Col>
       </Row>
-
     </React.Fragment>
   )
 }
