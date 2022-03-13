@@ -42,10 +42,10 @@ const AuthorSection: React.FC = () => {
       <Row>
         <Col xs={12}>
           <h2>Author</h2>
-          <hr className="mt-2 line"/>
+          <hr className="mt-2  line"/>
         </Col>
 
-        <Col xs={12}>
+        <Col xs={12} className="mt-2">
           {ConditionalComponent()}
           <ul className="list-unstyled">
             {
@@ -60,7 +60,7 @@ const AuthorSection: React.FC = () => {
           </ul>
         </Col>
 
-        <Col xs={4} md={4} className="mt-3">
+        <Col xs={4} md={4} className="mt-2 p-0">
           <Plus className="plus"/>
           Add Author
         </Col>
