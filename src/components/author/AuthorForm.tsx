@@ -39,17 +39,17 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   return (
     <React.Fragment>
       <Row>
-        <Col xs={8} md={9}className="mt-4 ">
+        <Col xs={8} md={8}className="mt-4 ">
           <h3>Create Author </h3>
         </Col>
-        <Col xs={4} md={3} className="mt-4 text-end pe-md-5" >
+        <Col xs={4} md={2} className="mt-4 text-end pe-md-5" >
           <XCircle className="c-circle"  />
         </Col>
       </Row>
       <Row>
-        <Col xs={12} md={12} className="pe-md-5">
-          <Form className="ms-md-5 " onSubmit={handleAuthorCreate}>
-            <Form.Label className="author-label">Name of the author</Form.Label>
+        <Col xs={12} md={10} className="pe-md-5">
+          <Form className="mt-3 ms-md-5" onSubmit={handleAuthorCreate}>
+            <Form.Label className="author-label ">Name of the author</Form.Label>
             <Form.Control
               type="text"
               className="author-field"
@@ -57,7 +57,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
               value={author}
               onChange={handleChange}
               />
-            <Button  type="submit" className="create-button float-end mt-3 px-4 py-1" >
+            <Button  type="submit" className="create-button float-end mt-4 px-4 py-1" >
               Create
             </Button>
           </Form>
