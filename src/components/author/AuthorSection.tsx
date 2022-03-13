@@ -29,12 +29,12 @@ const AuthorSection: React.FC = () => {
 
   const ConditionalComponent = () => {
     const div = authors.length === 0 ?
-      <p className="fst-italic text-muted small"> No authors listed here.</p>
+      <p className="fst-italic text-muted small mt-0"> No authors listed here.</p>
       : null;
     return (
-      <span>
+      <React.Fragment>
         {div}
-      </span>
+      </React.Fragment>
     )
   }
 
@@ -43,11 +43,11 @@ const AuthorSection: React.FC = () => {
         <Col xs={12} className="my-0">
           <h2 className="p-0 m-0">Author</h2>
           <span className="me-xl-5 me-lg-4 me-3">
-            <hr className="mt-2 line"/>
+            <hr className="mt-1 mb-0 line"/>
           </span>
         </Col>
 
-        <Col xs={12} >
+        <Col xs={12} className="mt-0 pt-0" >
           {ConditionalComponent()}
           <ul className="list-unstyled">
             {
