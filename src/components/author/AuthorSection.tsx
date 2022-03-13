@@ -32,25 +32,27 @@ const AuthorSection: React.FC = () => {
       <p className="fst-italic text-muted small"> No authors listed here.</p>
       : null;
     return (
-      <div>
+      <span>
         {div}
-      </div>
+      </span>
     )
   }
 
   return (
       <Row>
-        <Col xs={12}>
-          <h2>Author</h2>
-          <hr className="mt-2  line"/>
+        <Col xs={12} className="my-0">
+          <h2 className="p-0 m-0">Author</h2>
+          <span className="me-xl-5 me-lg-4 me-3">
+            <hr className="mt-2 line"/>
+          </span>
         </Col>
 
-        <Col xs={12} className="mt-2">
+        <Col xs={12} >
           {ConditionalComponent()}
           <ul className="list-unstyled">
             {
               authors.map((author: IAuthor, index: number) =>
-                <li className="author my-3" key={index}>
+                <li className="author my-2" key={index}>
                   <Author count={index + 1} author={author} onDeleteAuthorClick={handleAuthorDelete}
                           onHandleEditClick={handleEditIconClick}
                   />
@@ -60,7 +62,7 @@ const AuthorSection: React.FC = () => {
           </ul>
         </Col>
 
-        <Col xs={4} md={4} className="mt-2 p-0">
+        <Col xs={4} md={4} className="mt-2">
           <Plus className="plus"/>
           Add Author
         </Col>

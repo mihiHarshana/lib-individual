@@ -52,7 +52,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
             <Form.Label className="author-label ">Name of the author</Form.Label>
             <Form.Control
               type="text"
-              className="author-field"
+              className="author-field mb-3"
               required
               value={author}
               onChange={handleChange}
