@@ -8,7 +8,7 @@ type AuthorFormUxProps = {
   createAuthor: (author: IAuthor) =>void
 }
 
-const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
+const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [author, setAuthor] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +31,11 @@ const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
     )
   }
 
+  const onHandleEditClick = (author: IAuthor) => {
+    console.log(author);
+    console.log ("Edit clicked")
+  }
+
   return (
     <React.Fragment>
       <Row>
@@ -38,7 +43,7 @@ const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
           <h3>Create Author </h3>
         </Col>
         <Col xs={4} md={3} className="mt-4 text-end pe-md-5" >
-          <XCircle className="c-circle" />
+          <XCircle className="c-circle"  />
         </Col>
       </Row>
       <Row>
@@ -62,4 +67,4 @@ const AuthorFormUX: React.FC<AuthorFormUxProps> = (props) => {
   )
 }
 
-export default AuthorFormUX
+export default AuthorForm
