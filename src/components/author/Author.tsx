@@ -30,16 +30,19 @@ const Author: React.FC<AuthorProps> = (props) => {
   }
 
   return (
-
     <Row>
-      <Col xs={8} md={9}>
-        {count} {author.name}
-      </Col>
-      <Col xs={4} md={3}>
-        <Trash2 className="text-danger float-end trash2  py-1 " onClick={onHandleDeleteClick}/>
-        <Edit className="text-warning float-end edit py-1 px-md-0"
-              onClick={() => onHandleEditClick(count - 1)}
-        />
+      <Col xs={12} className="mt-2">
+        <Row>
+          <Col xs={8} md={9}>
+            <h4> {count} {author.name}</h4>
+          </Col>
+          <Col xs={4} md={3}>
+            <Trash2 className="text-danger float-end trash2 mx-md-1" onClick={onHandleDeleteClick}/>
+            <Edit className="text-warning float-end edit px-md-0"
+                  onClick={() => onHandleEditClick(count - 1)}
+            />
+          </Col>
+        </Row>
       </Col>
     </Row>
   )

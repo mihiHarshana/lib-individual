@@ -50,7 +50,7 @@ const AuthorSection: React.FC = () => {
           <ul className="list-unstyled">
             {
               authors.map((author: IAuthor, index: number) =>
-                <li className="author" key={index}>
+                <li className="author my-3" key={index}>
                   <Author count={index + 1} author={author} onDeleteAuthorClick={handleAuthorDelete}
                           onHandleEditClick={handleEditIconClick}
                   />
