@@ -4,6 +4,7 @@ import Author from "./Author";
 import {IAuthor} from "../../LibraryTypes";
 import {Plus} from "react-feather";
 import AuthorForm from "./AuthorForm";
+import AuthorTitle from "./AuthorTitle";
 
 const AuthorSection: React.FC = () => {
   const initAuthors: IAuthor[] = []
@@ -40,12 +41,7 @@ const AuthorSection: React.FC = () => {
 
   return (
       <Row>
-        <Col xs={12} className="my-0">
-          <h2 className="p-0 m-0">Author</h2>
-          <span className="me-xl-5 me-lg-4 me-3">
-            <hr className="mt-1 mb-0 line"/>
-          </span>
-        </Col>
+        <AuthorTitle />
 
         <Col xs={12} className="mt-0 pt-0" >
           {ConditionalComponent()}
