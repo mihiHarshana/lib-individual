@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 type AuthorProps = {
   author: IAuthor;
   count: number;
-  onDeleteAuthorClick: (index: number) => void;
+  /*onDeleteAuthorClick: (index: number) => void;*/
   onHandleEditClick: (index: number) => void
 }
 
@@ -25,7 +25,7 @@ const Author: React.FC<AuthorProps> = (props) => {
       if (!result.isConfirmed) {
         return;
       }
-      props.onDeleteAuthorClick(count - 1);
+    //  props.onDeleteAuthorClick(count - 1);
     })
   }
 

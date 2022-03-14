@@ -5,6 +5,7 @@ import {IAuthor} from "../../LibraryTypes";
 import {Plus} from "react-feather";
 import AuthorForm from "./AuthorForm";
 import AuthorTitle from "./AuthorTitle";
+import AuthorList from "./AuthorList";
 
 const AuthorSection: React.FC = () => {
   const initAuthors: IAuthor[] = []
@@ -18,45 +19,22 @@ const AuthorSection: React.FC = () => {
   }
 
   const handleAuthorDelete = (index: number) => {
-    const allAuthors: IAuthor [] = authors.slice();
-    allAuthors.splice(index, 1);
-    setAuthors(allAuthors);
-  }
-
-  const handleEditIconClick = (index: number) => {
-
-  }
+  const allAuthors: IAuthor [] = authors.slice();
+  allAuthors.splice(index, 1);
+  setAuthors(allAuthors);
+ }
 
 
-  const ConditionalComponent = () => {
-    const div = authors.length === 0 ?
-      <p className="fst-italic text-muted small mt-0"> No authors listed here.</p>
-      : null;
-    return (
-      <React.Fragment>
-        {div}
-      </React.Fragment>
-    )
-  }
+
+
+
+
 
   return (
       <Row>
         <AuthorTitle />
+        <AuthorList authors={authors}/>
 
-        <Col xs={12} className="mt-0 pt-0" >
-          {ConditionalComponent()}
-          <ul className="list-unstyled">
-            {
-              authors.map((author: IAuthor, index: number) =>
-                <li className="author my-2" key={index}>
-                  <Author count={index + 1} author={author} onDeleteAuthorClick={handleAuthorDelete}
-                          onHandleEditClick={handleEditIconClick}
-                  />
-                </li>
-              )
-            }
-          </ul>
-        </Col>
 
         <Col xs={4} md={4} className="mt-2">
           <Plus className="plus"/>
