@@ -33,7 +33,7 @@ const AuthorSection: React.FC = () => {
   return (
       <Row>
         <AuthorTitle />
-        <AuthorList authors={authors}/>
+        <AuthorList authors={authors} onDeleteAuthorClick={handleAuthorDelete}/>
 
 
         <Col xs={4} md={4} className="mt-2">

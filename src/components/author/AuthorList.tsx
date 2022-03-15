@@ -5,11 +5,12 @@ import Author from "./Author";
 
 type AuthorListProps = {
  authors: IAuthor[];
+ onDeleteAuthorClick: (index: number) => void;
 }
 
 const AuthorList:React.FC<AuthorListProps> = (props) => {
 
- const {authors} = props;
+ const {authors, onDeleteAuthorClick} = props;
 
 
 
@@ -38,7 +39,7 @@ const AuthorList:React.FC<AuthorListProps> = (props) => {
     authors.map((author: IAuthor, index: number) =>
       <li className="author my-2" key={index}>
        <Author count={index + 1} author={author}
-               onHandleEditClick={handleEditIconClick}
+               onHandleEditClick={handleEditIconClick} onDeleteAuthorClick={onDeleteAuthorClick}
        />
       </li>
     )

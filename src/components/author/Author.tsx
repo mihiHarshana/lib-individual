@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 type AuthorProps = {
   author: IAuthor;
   count: number;
-  /*onDeleteAuthorClick: (index: number) => void;*/
+  onDeleteAuthorClick: (index: number) => void;
   onHandleEditClick: (index: number) => void
 }
 
@@ -15,7 +15,7 @@ const Author: React.FC<AuthorProps> = (props) => {
 
   const {author, count, onHandleEditClick} = props;
 
-  const onHandleDeleteClick = () => {
+  const onHandleDeleteClick = (index: number) => {
     Swal.fire({
       title: 'Do you want to delete the author - ' + author.name + ' ? ',
       showDenyButton: true,
@@ -25,7 +25,7 @@ const Author: React.FC<AuthorProps> = (props) => {
       if (!result.isConfirmed) {
         return;
       }
-    //  props.onDeleteAuthorClick(count - 1);
+      props.onDeleteAuthorClick(count - 1);
     })
   }
 
@@ -37,7 +37,8 @@ const Author: React.FC<AuthorProps> = (props) => {
             <h5> {count} {author.name}</h5>
           </Col>
           <Col xs={4} md={3}>
-            <Trash2 className="text-danger float-end trash2 mx-md-1" onClick={onHandleDeleteClick}/>
+            <Trash2 className="text-danger float-end trash2 mx-md-1"
+                    onClick={() => onHandleDeleteClick(count - 1)}/>
             <Edit className="text-warning float-end edit px-md-0"
                   onClick={() => onHandleEditClick(count - 1)}
             />
