@@ -5,11 +5,15 @@ import {IAuthor} from "../../LibraryTypes";
 import Swal from "sweetalert2";
 
 type AuthorFormUxProps = {
-  createAuthor: (author: IAuthor) =>void
+  createAuthor: (author: IAuthor) =>void;
+  isFormVisible: boolean;
 }
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [author, setAuthor] = useState("");
+  const [isAuthorFormVisible, setAuthorFormVisible] = useState(true);
+
+  const {isFormVisible} = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuthor(event.target.value);
@@ -36,34 +40,41 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     console.log ("Edit clicked")
   }
 
+  const onHandleCloseClick = () => {
+    setAuthorFormVisible(false);
+  }
+
   return (
-    <React.Fragment>
-      <Row>
-        <Col xs={8} md={8}className="mt-4 ">
-          <h3>Create Author </h3>
-        </Col>
-        <Col xs={4} md={2} className="mt-4 text-end pe-md-5" >
-          <XCircle className="c-circle"  />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12} md={10} className="pe-md-5">
-          <Form className="mt-3 ms-md-5" onSubmit={handleAuthorCreate}>
-            <Form.Label className="author-label ">Name of the author</Form.Label>
-            <Form.Control
-              type="text"
-              className="author-field mb-3"
-              required
-              value={author}
-              onChange={handleChange}
+    (isAuthorFormVisible == true
+      ?  <React.Fragment>
+        <Row>
+          <Col xs={8} md={8}className="mt-4 ">
+            <h3>Create Author </h3>
+          </Col>
+          <Col xs={4} md={2} className="mt-4 text-end pe-md-5" >
+            <XCircle className="c-circle" onClick={onHandleCloseClick}  />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={10} className="pe-md-5">
+            <Form className="mt-3 ms-md-5" onSubmit={handleAuthorCreate}>
+              <Form.Label className="author-label ">Name of the author</Form.Label>
+              <Form.Control
+                type="text"
+                className="author-field mb-3"
+                required
+                value={author}
+                onChange={handleChange}
               />
-            <Button  type="submit" className="create-button float-end mt-4 px-4 py-1" >
-              Create
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </React.Fragment>
+              <Button  type="submit" className="create-button float-end mt-4 px-4 py-1" >
+                Create
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </React.Fragment>
+
+      : <React.Fragment></React.Fragment>)
   )
 }
 

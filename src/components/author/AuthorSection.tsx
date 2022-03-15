@@ -6,10 +6,12 @@ import AuthorForm from "./AuthorForm";
 import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
 
+
 const AuthorSection: React.FC = () => {
   const initAuthors: IAuthor[] = []
   const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
   const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor>();
+  const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
 
   const handleCreateAuthor = (newAuthor: IAuthor) => {
     const allAuthors: IAuthor[] = authors.slice();
@@ -32,7 +34,9 @@ const AuthorSection: React.FC = () => {
           Add Author
         </Col>
         <Col xs={12} md={10}>
-          <AuthorForm createAuthor={handleCreateAuthor}/>
+          <AuthorForm createAuthor={handleCreateAuthor}
+                      isFormVisible={isAuthorFormVisible}
+          />
         </Col>
       </Row>
   )
