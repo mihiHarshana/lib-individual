@@ -5,6 +5,7 @@ import {Plus} from "react-feather";
 import AuthorForm from "./AuthorForm";
 import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
+import AddAuthor from "./AddAuthor";
 
 
 const AuthorSection: React.FC = () => {
@@ -29,10 +30,7 @@ const AuthorSection: React.FC = () => {
       <Row>
         <AuthorTitle />
         <AuthorList authors={authors} onDeleteAuthorClick={handleAuthorDelete}/>
-        <Col xs={4} md={4} className="mt-2">
-          <Plus className="plus"/>
-          Add Author
-        </Col>
+        <AddAuthor />
         <Col xs={12} md={10}>
           <AuthorForm createAuthor={handleCreateAuthor}
                       isFormVisible={isAuthorFormVisible}

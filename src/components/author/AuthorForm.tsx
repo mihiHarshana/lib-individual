@@ -13,7 +13,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [author, setAuthor] = useState("");
   const [isAuthorFormVisible, setAuthorFormVisible] = useState(true);
 
-  const {isFormVisible} = props;
+
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuthor(event.target.value);
