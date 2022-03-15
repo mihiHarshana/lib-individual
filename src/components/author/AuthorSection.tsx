@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {Col, Row} from "react-bootstrap";
-import Author from "./Author";
 import {IAuthor} from "../../LibraryTypes";
 import {Plus} from "react-feather";
 import AuthorForm from "./AuthorForm";
@@ -24,18 +23,10 @@ const AuthorSection: React.FC = () => {
   setAuthors(allAuthors);
  }
 
-
-
-
-
-
-
   return (
       <Row>
         <AuthorTitle />
         <AuthorList authors={authors} onDeleteAuthorClick={handleAuthorDelete}/>
-
-
         <Col xs={4} md={4} className="mt-2">
           <Plus className="plus"/>
           Add Author

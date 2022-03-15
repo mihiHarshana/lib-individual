@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {IAuthor} from "../../LibraryTypes";
 import {Col} from "react-bootstrap";
 import Author from "./Author";
@@ -11,10 +11,6 @@ type AuthorListProps = {
 const AuthorList:React.FC<AuthorListProps> = (props) => {
 
  const {authors, onDeleteAuthorClick} = props;
-
-
-
-
 
  const handleEditIconClick = (index: number) => {
 
