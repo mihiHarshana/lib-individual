@@ -12,7 +12,7 @@ const AuthorSection: React.FC = () => {
   const initAuthors: IAuthor[] = []
   const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
   const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor>();
-  const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
+  const [isAuthorFormVisible,  setAuthorFormVisible] = useState(true);
 
   const handleCreateAuthor = (newAuthor: IAuthor) => {
     const allAuthors: IAuthor[] = authors.slice();
@@ -26,17 +26,26 @@ const AuthorSection: React.FC = () => {
   setAuthors(allAuthors);
  }
 
+  const onHandleCloseClick = () => {
+    setAuthorFormVisible(false);
+  }
+
+  const onHandleAddClick = () => {
+    setAuthorFormVisible(true);
+  }
   return (
       <Row>
         <AuthorTitle />
         <AuthorList authors={authors} onDeleteAuthorClick={handleAuthorDelete}/>
-        <AddAuthor />
+        <AddAuthor  onHandleAddClick={onHandleAddClick}/>
         <Col xs={12} md={10}>
           <AuthorForm createAuthor={handleCreateAuthor}
                       isFormVisible={isAuthorFormVisible}
+                      onHandleCloseClick={onHandleCloseClick}
           />
         </Col>
       </Row>
   )
 }
+
 export default AuthorSection;

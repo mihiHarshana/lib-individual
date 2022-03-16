@@ -7,13 +7,12 @@ import Swal from "sweetalert2";
 type AuthorFormUxProps = {
   createAuthor: (author: IAuthor) =>void;
   isFormVisible: boolean;
+  onHandleCloseClick:  () =>void;
 }
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [author, setAuthor] = useState("");
-  const [isAuthorFormVisible, setAuthorFormVisible] = useState(true);
-
-
+  const {isFormVisible, onHandleCloseClick } = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuthor(event.target.value);
@@ -40,12 +39,8 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     console.log ("Edit clicked")
   }
 
-  const onHandleCloseClick = () => {
-    setAuthorFormVisible(false);
-  }
-
   return (
-    (isAuthorFormVisible == true
+    (isFormVisible == true
       ?  <React.Fragment>
         <Row>
           <Col xs={8} md={8}className="mt-4 ">
