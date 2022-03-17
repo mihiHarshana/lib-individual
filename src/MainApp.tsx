@@ -13,7 +13,7 @@ const MainApp = () => {
           <Welcome />
         </Col>
         <Col xs={12} lg={6}>
-          <BookUx />
+         {/* <BookUx />*/}
         </Col>
         <Col xs={12} lg={6} className="px-md-5">
           <AuthorSection />
