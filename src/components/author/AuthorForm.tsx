@@ -8,25 +8,27 @@ type AuthorFormUxProps = {
   createAuthor: (author: IAuthor) =>void;
   isFormVisible: boolean;
   onHandleCloseClick:  () =>void;
+  authorToUpdate: IAuthor | null;
 }
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
-  const [author, setAuthor] = useState("");
-  const {isFormVisible, onHandleCloseClick } = props;
+  const [authorName, setAuthorName] = useState("null");
+  const {isFormVisible, onHandleCloseClick, authorToUpdate } = props;
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuthor(event.target.value);
+
+  const handleChange = (name: string) => {
+      setAuthorName(name);
   };
 
   const handleAuthorCreate = (event: FormEvent) => {
     event.preventDefault();
-    if (!author ) {
+    if (!authorName ) {
       return;
     }
     let newAuthor:IAuthor;
-    newAuthor = {name:author, index:1  }
+    newAuthor = {name:authorName, index:1  }
     props.createAuthor(newAuthor);
-    setAuthor("");
+    setAuthorName("");
 
     Swal.fire(
       'Author ' + newAuthor.name +  ' created successfully ',
@@ -34,10 +36,6 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     )
   }
 
-  const onHandleEditClick = (author: IAuthor) => {
-    console.log(author);
-    console.log ("Edit clicked")
-  }
 
   return (
     (isFormVisible == true
@@ -58,8 +56,10 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
                 type="text"
                 className="author-field mb-3"
                 required
-                value={author}
-                onChange={handleChange}
+                value={authorName}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  handleChange(event.target.value)
+                }
               />
               <Button  type="submit" className="create-button float-end mt-4 px-4 py-1" >
                 Create
