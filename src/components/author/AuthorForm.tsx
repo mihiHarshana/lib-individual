@@ -1,4 +1,4 @@
-import React, {FormEvent, useEffect, useState} from "react";
+import React, {FormEvent, ReactEventHandler, useEffect, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor} from "../../LibraryTypes";
@@ -58,7 +58,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
 
 
   return (
-    (isFormVisible === true
+    (isFormVisible == true
       ?  <React.Fragment>
         <Row>
           <Col xs={8} md={8}className="mt-4 ">
