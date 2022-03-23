@@ -12,7 +12,6 @@ type AuthorListProps = {
 const AuthorList: React.FC<AuthorListProps> = (props) => {
 
   const {authors, onDeleteAuthorClick, onEditAuthorClick} = props;
-  const [value, setValue] = useState("");
 
   const ConditionalComponent = () => {
     const div = authors.length === 0 ?

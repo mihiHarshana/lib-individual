@@ -48,6 +48,7 @@ const AuthorSection: React.FC = () => {
 
     allAuthors.splice(updateIndex, 1 ,newAuthor);
     setAuthors(allAuthors);
+    setAuthorToUpdate(null);
   }
 
   return (

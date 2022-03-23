@@ -62,7 +62,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
       ?  <React.Fragment>
         <Row>
           <Col xs={8} md={8}className="mt-4 ">
-            <h3>Create Author </h3>
+            <h3>{ (authorToUpdate === null) ? 'Create ' : 'Update '} Author </h3>
           </Col>
           <Col xs={4} md={2} className="mt-4 text-end pe-md-5" >
             <XCircle className="c-circle" onClick={onHandleCloseClick}  />
@@ -82,7 +82,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
                 }
               />
               <Button  type="submit" className="create-button float-end mt-4 px-4 py-1" >
-                Create
+                { (authorToUpdate === null) ? 'Create ' : 'Update '}
               </Button>
             </Form>
           </Col>
