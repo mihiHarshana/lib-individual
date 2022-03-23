@@ -8,12 +8,12 @@ type AuthorProps = {
   author: IAuthor;
   count: number;
   onDeleteAuthorClick: (index: number) => void;
-  onHandleEditClick: (index: number) => void
+  onEditAuthorClick: (index: number) => void
 }
 
 const Author: React.FC<AuthorProps> = (props) => {
 
-  const {author, count, onHandleEditClick} = props;
+  const {author, count, onEditAuthorClick} = props;
 
   const onHandleDeleteClick = (index: number) => {
     Swal.fire({
@@ -27,6 +27,9 @@ const Author: React.FC<AuthorProps> = (props) => {
       }
       props.onDeleteAuthorClick(count - 1);
     })
+  }
+  const onHandleEditClick = (index: number) => {
+    props.onEditAuthorClick(index);
   }
 
   return (

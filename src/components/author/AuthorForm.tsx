@@ -1,4 +1,4 @@
-import React, {FormEvent, ReactEventHandler, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor} from "../../LibraryTypes";
@@ -8,39 +8,57 @@ type AuthorFormUxProps = {
   createAuthor: (author: IAuthor) =>void;
   isFormVisible: boolean;
   onHandleCloseClick:  () =>void;
+  authorToUpdate: IAuthor | null;
+  updateAuthor: (author: IAuthor) =>void;
 }
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
-  const [author, setAuthor] = useState("");
-  const {isFormVisible, onHandleCloseClick } = props;
+  const [authorName, setAuthorName] = useState<string>("");
+  const {isFormVisible, onHandleCloseClick, authorToUpdate } = props;
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuthor(event.target.value);
+  useEffect(() => {
+    // Update the document title using the browser API
+    if (authorToUpdate != null) {
+      setAuthorName(authorToUpdate.name)
+    }
+  },[authorToUpdate] );
+
+
+  const handleChange = (name: string) => {
+      setAuthorName(name);
   };
 
   const handleAuthorCreate = (event: FormEvent) => {
     event.preventDefault();
-    if (!author ) {
+    if (!authorName ) {
       return;
     }
-    let newAuthor:IAuthor;
-    newAuthor = {name:author, index:1  }
-    props.createAuthor(newAuthor);
-    setAuthor("");
+    if (authorToUpdate != null) {
+      let newAuthor:IAuthor;
+      newAuthor = {name:authorName, index:1  }
+      props.updateAuthor(newAuthor);
+      setAuthorName("");
+      showMessage("Updated ", newAuthor.name)
 
+    } else {
+      let newAuthor:IAuthor;
+      newAuthor = {name:authorName, index:1  }
+      props.createAuthor(newAuthor);
+      setAuthorName("");
+      showMessage("Created ", newAuthor.name)
+    }
+  }
+
+  const showMessage = (message: string, authorname: string) => {
     Swal.fire(
-      'Author ' + newAuthor.name +  ' created successfully ',
+      'Author ' + authorname +  ' '  +  message + 'successfully ',
       'success'
     )
   }
 
-  const onHandleEditClick = (author: IAuthor) => {
-    console.log(author);
-    console.log ("Edit clicked")
-  }
 
   return (
-    (isFormVisible == true
+    (isFormVisible === true
       ?  <React.Fragment>
         <Row>
           <Col xs={8} md={8}className="mt-4 ">
@@ -58,8 +76,10 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
                 type="text"
                 className="author-field mb-3"
                 required
-                value={author}
-                onChange={handleChange}
+                value={authorName}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  handleChange(event.target.value)
+                }
               />
               <Button  type="submit" className="create-button float-end mt-4 px-4 py-1" >
                 Create
@@ -69,7 +89,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
         </Row>
       </React.Fragment>
 
-      : <React.Fragment></React.Fragment>)
+      : <React.Fragment />)
   )
 }
 
