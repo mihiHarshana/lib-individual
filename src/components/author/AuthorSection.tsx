@@ -10,7 +10,7 @@ const AuthorSection: React.FC = () => {
   const initAuthors: IAuthor[] = []
   const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
   const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor | null>(null);
-  const [isAuthorFormVisible,  setAuthorFormVisible] = useState(true);
+  const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
   const [updateIndex, setUpdateIndex] = useState<number | null>(null);
 
 
