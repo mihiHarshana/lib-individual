@@ -9,7 +9,7 @@ import AddAuthor from "./AddAuthor";
 const AuthorSection: React.FC = () => {
   const initAuthors: IAuthor[] = []
   const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
-  const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor | null>(null);
+  const [authorToUpdate, setAuthorToUpdate] = useState(authors[0]);
   const [isAuthorFormVisible,  setAuthorFormVisible] = useState(true);
 
 
@@ -34,7 +34,7 @@ const AuthorSection: React.FC = () => {
   }
 
   const onHandleEditClick = (index: number) => {
-    console.log(authors[index]);
+    console.log("author eidit - Author section");
     setAuthorToUpdate(authors[index]);
   }
 
@@ -49,7 +49,6 @@ const AuthorSection: React.FC = () => {
                       isFormVisible={isAuthorFormVisible}
                       onHandleCloseClick={onHandleCloseClick}
                       authorToUpdate={authorToUpdate}
-
 
           />
         </Col>

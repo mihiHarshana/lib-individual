@@ -1,4 +1,4 @@
-import React, {FormEvent, ReactEventHandler, useEffect, useState} from "react";
+import React, {FormEvent, ReactEventHandler, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor} from "../../LibraryTypes";
@@ -14,12 +14,6 @@ type AuthorFormUxProps = {
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [authorName, setAuthorName] = useState("null");
   const {isFormVisible, onHandleCloseClick, authorToUpdate } = props;
-
-  useEffect(() => {
-    // Update the document title using the browser API
-    console.log("Hate Vimu")
-
-  },[authorToUpdate] );
 
 
   const handleChange = (name: string) => {
