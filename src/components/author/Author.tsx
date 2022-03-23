@@ -1,46 +1,54 @@
 import React from "react";
 import {Col, Row} from "react-bootstrap";
-import {Edit, Edit2, Plus, Trash2} from "react-feather";
+import {Edit, Trash2} from "react-feather";
 import {IAuthor} from "../../LibraryTypes";
 import Swal from 'sweetalert2'
 
 type AuthorProps = {
   author: IAuthor;
-  index: number;
-}
-
-function onHandleDeleteClick() {
-  Swal.fire({
-    title: 'Do you want to save the changes?',
-    showDenyButton:true,
-    confirmButtonText: 'Delete',
-    denyButtonText: `Cancel`,
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-
-    } else if (result.isDenied) {
-      //Action to be performed here
-    }
-  })
+  count: number;
+  onDeleteAuthorClick: (index: number) => void;
+  onEditAuthorClick: (index: number) => void
 }
 
 const Author: React.FC<AuthorProps> = (props) => {
+
+  const {author, count, onEditAuthorClick} = props;
+
+  const onHandleDeleteClick = (index: number) => {
+    Swal.fire({
+      title: 'Do you want to delete the author - ' + author.name + ' ? ',
+      showDenyButton: true,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      if (!result.isConfirmed) {
+        return;
+      }
+      props.onDeleteAuthorClick(count - 1);
+    })
+  }
+  const onHandleEditClick = (index: number) => {
+    props.onEditAuthorClick(index);
+  }
+
   return (
-    <React.Fragment>
-      <Row className="author">
-        <Col xs={8} md={9} className="py-1" >
-          {props.index} {props.author.name}
-        </Col>
-
-        <Col xs={4} md={3}>
-
-          <Trash2 className="text-danger float-end trash2  py-1 py-0" onClick={onHandleDeleteClick}/>
-          <Edit className="text-warning float-end edit py-1 px-md-0 " />
-        </Col>
-      </Row>
-
-    </React.Fragment>
+    <Row>
+      <Col xs={12} className="mt-1">
+        <Row>
+          <Col xs={8} md={9}>
+            <h5> {count} {author.name}</h5>
+          </Col>
+          <Col xs={4} md={3}>
+            <Trash2 className="text-danger float-end trash2 mx-md-1"
+                    onClick={() => onHandleDeleteClick(count - 1)}/>
+            <Edit className="text-warning float-end edit px-md-0"
+                  onClick={() => onHandleEditClick(count - 1)}
+            />
+          </Col>
+        </Row>
+      </Col>
+    </Row>
   )
 }
 

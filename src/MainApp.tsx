@@ -1,8 +1,9 @@
 import React from "react";
 import Welcome from "./components/welcomeux/Welcome";
 import {Col, Container, Row} from "react-bootstrap";
-import AuthorUx from "./components/author/AuthorUx";
+import AuthorSection from "./components/author/AuthorSection";
 import BookUx from "./components/books/BookUx";
+import Footer from "./components/footer/Footer";
 
 const MainApp = () => {
   return (
@@ -12,10 +13,13 @@ const MainApp = () => {
           <Welcome />
         </Col>
         <Col xs={12} lg={6}>
-          <BookUx />
+         {/* <BookUx />*/}
         </Col>
         <Col xs={12} lg={6} className="px-md-5">
-          <AuthorUx />
+          <AuthorSection />
+        </Col>
+        <Col xs={12} >
+          <Footer  />
         </Col>
       </Row>
     </Container>
