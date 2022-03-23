@@ -11,7 +11,6 @@ const AuthorSection: React.FC = () => {
   const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
   const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor | null>(null);
   const [isAuthorFormVisible,  setAuthorFormVisible] = useState(true);
-  const [updateIndex, setUpdateIndex] = useState<number | null>(null);
 
 
   const handleCreateAuthor = (newAuthor: IAuthor) => {
@@ -37,17 +36,6 @@ const AuthorSection: React.FC = () => {
   const onHandleEditClick = (index: number) => {
     console.log(authors[index]);
     setAuthorToUpdate(authors[index]);
-    setUpdateIndex(index);
-  }
-
-  const handleUpdateAuthor = (newAuthor: IAuthor) => {
-    if (updateIndex === null) {
-      return;
-    }
-    const allAuthors: IAuthor[] = authors.slice();
-
-    allAuthors.splice(updateIndex, 1 ,newAuthor);
-    setAuthors(allAuthors);
   }
 
   return (
@@ -61,7 +49,8 @@ const AuthorSection: React.FC = () => {
                       isFormVisible={isAuthorFormVisible}
                       onHandleCloseClick={onHandleCloseClick}
                       authorToUpdate={authorToUpdate}
-                      updateAuthor={handleUpdateAuthor}
+
+
           />
         </Col>
       </Row>

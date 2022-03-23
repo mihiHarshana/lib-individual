@@ -9,18 +9,16 @@ type AuthorFormUxProps = {
   isFormVisible: boolean;
   onHandleCloseClick:  () =>void;
   authorToUpdate: IAuthor | null;
-  updateAuthor: (author: IAuthor) =>void;
 }
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
-  const [authorName, setAuthorName] = useState<string>("");
+  const [authorName, setAuthorName] = useState("null");
   const {isFormVisible, onHandleCloseClick, authorToUpdate } = props;
 
   useEffect(() => {
     // Update the document title using the browser API
-    if (authorToUpdate != null) {
-      setAuthorName(authorToUpdate.name)
-    }
+    console.log("Hate Vimu")
+
   },[authorToUpdate] );
 
 
@@ -33,25 +31,13 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     if (!authorName ) {
       return;
     }
-    if (authorToUpdate != null) {
-      let newAuthor:IAuthor;
-      newAuthor = {name:authorName, index:1  }
-      props.updateAuthor(newAuthor);
-      setAuthorName("");
-      showMessage("Updated ", newAuthor.name)
+    let newAuthor:IAuthor;
+    newAuthor = {name:authorName, index:1  }
+    props.createAuthor(newAuthor);
+    setAuthorName("");
 
-    } else {
-      let newAuthor:IAuthor;
-      newAuthor = {name:authorName, index:1  }
-      props.createAuthor(newAuthor);
-      setAuthorName("");
-      showMessage("Created ", newAuthor.name)
-    }
-  }
-
-  const showMessage = (message: string, authorname: string) => {
     Swal.fire(
-      'Author ' + authorname +  ' '  +  message + 'successfully ',
+      'Author ' + newAuthor.name +  ' created successfully ',
       'success'
     )
   }
@@ -89,7 +75,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
         </Row>
       </React.Fragment>
 
-      : <React.Fragment />)
+      : <React.Fragment></React.Fragment>)
   )
 }
 
