@@ -70,7 +70,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
         </Row>
         <Row>
           <Col xs={12} md={10} className="pe-md-5">
-            <Form className="mt-3 ms-md-5" onSubmit={handleAuthorCreate}>
+            <Form className="mt-2 ms-md-5" onSubmit={handleAuthorCreate}>
               <Form.Label className="author-label ">Name of the author</Form.Label>
               <Form.Control
                 type="text"
@@ -82,7 +82,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
                   handleChange(event.target.value)
                 }
               />
-              <Button  type="submit" className="create-button float-end mt-4 px-4 py-1" >
+              <Button  type="submit" className="create-button float-end mt-2 px-4 py-1" >
                 { (authorToUpdate === null) ? 'Create' : 'Update'}
               </Button>
             </Form>
