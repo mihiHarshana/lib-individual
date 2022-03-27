@@ -71,7 +71,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
         <Row>
           <Col xs={12} md={10} className="pe-md-5">
             <Form className="mt-2 ms-md-5" onSubmit={handleAuthorCreate}>
-              <Form.Label className="author-label ">Name of the author</Form.Label>
+              <Form.Label className="author-label ">Name of Author</Form.Label>
               <Form.Control
                 type="text"
                 className="author-field mb-3"
