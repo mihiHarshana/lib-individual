@@ -45,7 +45,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
       newAuthor = {name:authorName, index:1  }
       props.createAuthor(newAuthor);
       setAuthorName("");
-      showMessage("Created ", newAuthor.name)
+     // showMessage("Created ", newAuthor.name)
     }
   }
 
