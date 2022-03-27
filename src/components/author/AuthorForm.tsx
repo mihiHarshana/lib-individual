@@ -82,7 +82,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
                   handleChange(event.target.value)
                 }
               />
-              <Button  type="submit" className="create-button float-end mt-2 px-4 py-1" >
+              <Button  type="submit" className="create-button float-end mt-2  px-4 py-1" >
                 { (authorToUpdate === null) ? 'Create' : 'Update'}
               </Button>
             </Form>
