@@ -7,6 +7,9 @@ import Swal from 'sweetalert2'
 type BookProps = {
   book: IBook;
   index: number;
+  deleteBook: (index: number) => void;
+  onBookUpdateSet: (index: number) => void;
+
 }
 
 function onhandleClick() {
@@ -26,6 +29,8 @@ function onhandleClick() {
 }
 
 const Book: React.FC<BookProps> = (props) => {
+  const {book, index, deleteBook, onBookUpdateSet} = props;
+
   return (
     <React.Fragment>
       <Row>
@@ -36,7 +41,7 @@ const Book: React.FC<BookProps> = (props) => {
            </Col>
            <Col xs={4} md={3}>
              <Trash2 className="text-danger float-end trash2  py-1 me-2" onClick={onhandleClick}/>
-             <Edit className="text-warning float-end edit py-1 px-md-0  " />
+             <Edit className="text-warning float-end edit py-1 px-md-0 " onClick={ () => onBookUpdateSet(index)} />
            </Col>
          </Row>
        </Col>

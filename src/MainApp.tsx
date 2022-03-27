@@ -1,11 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 import Welcome from "./components/welcomeux/Welcome";
 import {Col, Container, Row} from "react-bootstrap";
 import AuthorSection from "./components/author/AuthorSection";
-import BookUx from "./components/books/BookUx";
+import BooksSection from "./components/books/BooksSection";
 import Footer from "./components/footer/Footer";
+import {IAuthor, IBook} from "./LibraryTypes";
 
 const MainApp = () => {
+  const [authors, setAuthors] = useState<IAuthor[]>([]);
+  const [books, setBooks] = useState<IBook[]>([]);
+
+  const onBookListChange = (newBooks: IBook[]) => {
+    setBooks(newBooks);
+  };
+
+  const onAuthorListChange = (newAuthors: IAuthor[]) => {
+    setAuthors(newAuthors);
+  };
+
   return (
     <Container fluid>
       <Row>
@@ -13,10 +25,13 @@ const MainApp = () => {
           <Welcome />
         </Col>
         <Col xs={12} lg={6}>
-         {/* <BookUx />*/}
+          <BooksSection authors={authors}
+                        onBookListChange={onBookListChange}/>
         </Col>
         <Col xs={12} lg={6} className="px-md-5">
-          <AuthorSection />
+          <AuthorSection books={books}
+                         onAuthorListChange={onAuthorListChange}
+          />
         </Col>
         <Col xs={12} >
           <Footer  />

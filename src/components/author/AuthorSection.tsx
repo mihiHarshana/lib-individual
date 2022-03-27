@@ -1,17 +1,28 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
-import {IAuthor} from "../../LibraryTypes";
+import {IAuthor, IBook} from "../../LibraryTypes";
 import AuthorForm from "./AuthorForm";
 import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
 import AddAuthor from "./AddAuthor";
 
-const AuthorSection: React.FC = () => {
+type AuthorSectionProps = {
+  books: IBook[];
+  onAuthorListChange: (newAuthors: IAuthor[]) => void;
+};
+
+const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
   const initAuthors: IAuthor[] = []
   const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
   const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor | null>(null);
   const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
   const [updateIndex, setUpdateIndex] = useState<number | null>(null);
+
+  const { books, onAuthorListChange } = props;
+
+  useEffect(() => {
+    onAuthorListChange(authors)
+  }, [authors]);
 
 
   const handleCreateAuthor = (newAuthor: IAuthor) => {
