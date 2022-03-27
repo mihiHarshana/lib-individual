@@ -97,7 +97,7 @@ const BookFormUx: React.FC<BooksFormProps> = (props) => {
   })*/
   return (
     <React.Fragment>
-      <Col xs={12}>
+      <Col xs={12} className="pt-5">
         <Row>
           <Col xs={8} md={9}  className="mt-3 ms-md-1">
             <h4>{updateBook ? "Update ": "Create "} Book</h4>

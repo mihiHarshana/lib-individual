@@ -58,7 +58,6 @@ const BooksSection: React.FC<BookSectionProps> = (props) => {
     setBooks(allBooks);
     setUpdateBook(null);
     setUpdateIndex(null);
-
   }
 
   const handleOnBookUpdateSet = (index: number) => {

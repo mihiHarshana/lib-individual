@@ -24,7 +24,7 @@ const MainApp = () => {
         <Col xs={12}>
           <Welcome />
         </Col>
-        <Col xs={12} lg={6}>
+        <Col xs={12} lg={6} className="ps-md-3">
           <BooksSection authors={authors}
                         onBookListChange={onBookListChange}/>
         </Col>

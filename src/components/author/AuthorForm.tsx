@@ -61,7 +61,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     (isFormVisible === true
       ?  <React.Fragment>
         <Row>
-          <Col xs={8} md={8}className="mt-4 ">
+          <Col xs={8} md={8}className="mt-5">
             <h4>{ (authorToUpdate === null) ? 'Create ' : 'Update '} Author </h4>
           </Col>
           <Col xs={4} md={2} className="mt-4 text-end pe-md-5" >
