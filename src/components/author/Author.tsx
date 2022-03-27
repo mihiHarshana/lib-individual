@@ -39,10 +39,11 @@ const Author: React.FC<AuthorProps> = (props) => {
           <Col xs={8} md={9}>
             <h5> {count} {author.name}</h5>
           </Col>
-          <Col xs={4} md={3}>
-            <Trash2 className="text-danger float-end trash2 mx-md-1"
-                    onClick={() => onHandleDeleteClick(count - 1)}/>
-            <Edit className="text-warning float-end edit px-md-0"
+          <Col xs={4} md={3} >
+            <Trash2 className="text-danger  trash2 mx-md-1"
+                    onClick={() => onHandleDeleteClick(count - 1)}
+            />
+            <Edit className="text-warning edit px-md-0 me-2"
                   onClick={() => onHandleEditClick(count - 1)}
             />
           </Col>
