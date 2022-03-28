@@ -114,6 +114,7 @@ const BookFormUx: React.FC<BooksFormProps> = (props) => {
                 <Form.Control
                   type="text"
                   className="books-field"
+                  size={"sm"}
                   required
                   onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                     handleOnBookNameChanged(ev.target.value)
@@ -121,10 +122,11 @@ const BookFormUx: React.FC<BooksFormProps> = (props) => {
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="priceOfTheBook">
-                <Form.Label  className="book-label">Price</Form.Label>
+                <Form.Label className="book-label">Price</Form.Label>
                 <Form.Control
-                  type="text"
                   className="books-field"
+                  size={"sm"}
+                  type="text"
                   required
                   onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                     handleOnPriceChanged(ev.target.value)
@@ -132,9 +134,8 @@ const BookFormUx: React.FC<BooksFormProps> = (props) => {
                 />
               </Form.Group>
               <Form.Group className="mb-1" controlId="form">
-                <Form.Label  className="book-label">Author</Form.Label>
+                <Form.Label className="book-label">Author</Form.Label>
                 <Select
-
                   isSearchable={true}
                   isClearable={true}
                   options={authors}
