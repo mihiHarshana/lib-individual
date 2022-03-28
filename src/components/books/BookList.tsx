@@ -14,15 +14,15 @@ const BookList: React.FC<BookListProps>= (props) => {
   if (bookList.length === 0 ) {
     return (
       <p>
-        <i className="text-muted small ms-md-1">No Book Listed Here.</i>
+        <i className="text-muted small ms-md-1 ">No Book Listed Here.</i>
       </p>
     )
   }
 
   return (
     <Row>
-      <Col xs={12} className="p-0 ms-md-2">
-        <ul className="p-3 mt-1 list-unstyled">
+      <Col xs={12} className="p-0 m-0 ms-md-2">
+        <ul className="mx-1 mt-1 list-unstyled">
           {bookList.map((book: IBook, index: number) => (
             <Book
               book={book}

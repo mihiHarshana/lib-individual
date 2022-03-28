@@ -36,8 +36,8 @@ const Book: React.FC<BookProps> = (props) => {
       <Row>
        <Col xs={12}  className="book pe-2">
          <Row>
-           <Col xs={8} md={9} className="py-1"  >
-             {props.index} {props.book.name}
+           <Col xs={8} md={9}>
+             <h6 className="pt-2">{props.index} {props.book.name}</h6>
            </Col>
            <Col xs={4} md={3}>
              <Trash2 className="text-danger trash2 me-2 my-1" onClick={onhandleClick}/>

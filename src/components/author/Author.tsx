@@ -34,10 +34,10 @@ const Author: React.FC<AuthorProps> = (props) => {
 
   return (
     <Row>
-      <Col xs={12} className="mt-1">
+      <Col xs={12} >
         <Row>
           <Col xs={8} md={9}>
-            <h5> {count} {author.name}</h5>
+            <h6 className="pt-1"> {count} {author.name}</h6>
           </Col>
           <Col xs={4} md={3} >
             <Trash2 className="text-danger  trash2 mx-md-1"
