@@ -14,7 +14,7 @@ const BookList: React.FC<BookListProps>= (props) => {
   if (bookList.length === 0 ) {
     return (
       <p>
-        <i className="text-muted ms-md-1">No Book Listed Here.</i>
+        <i className="text-muted small ms-md-1">No Book Listed Here.</i>
       </p>
     )
   }
