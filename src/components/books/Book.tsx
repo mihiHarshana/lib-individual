@@ -12,24 +12,23 @@ type BookProps = {
 
 }
 
-function onhandleClick() {
-  Swal.fire({
-    title: 'Do you want to Delete the Book?',
-    showDenyButton:true,
-    confirmButtonText: 'Delete',
-    denyButtonText: `Cancel`,
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      //Actions to be performed here
-    } else if (result.isDenied) {
-      //Action to be performed here
-    }
-  })
-}
+
 
 const Book: React.FC<BookProps> = (props) => {
   const {book, index, deleteBook, onBookUpdateSet} = props;
+
+  const handleOnClick = () => {
+    Swal.fire({
+      title: 'Do you want to delete the author - ' + book.name + ' ? ',
+      showDenyButton: true,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Cancel`,
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        deleteBook(index);
+      }
+    });
+  };
 
   return (
     <React.Fragment>
@@ -40,7 +39,7 @@ const Book: React.FC<BookProps> = (props) => {
              <h6 className="pt-2">{props.index} {props.book.name}</h6>
            </Col>
            <Col xs={4} md={3}>
-             <Trash2 className="text-danger trash2 me-2 my-1" onClick={onhandleClick}/>
+             <Trash2 className="text-danger trash2 me-2 my-1" onClick={handleOnClick}/>
              <Edit className="text-warning  edit me-2 px-md-0 my-1 " onClick={ () => onBookUpdateSet(index)} />
            </Col>
          </Row>

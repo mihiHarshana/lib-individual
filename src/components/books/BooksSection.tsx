@@ -37,8 +37,9 @@ const BooksSection: React.FC<BookSectionProps> = (props) => {
 
   const handleOnBookDelete = (index: number) => {
     const allBooks: IBook[] = books.slice();
-    allBooks.splice(index, 1);
+    allBooks.splice(index -1 , 1);
     setBooks(allBooks);
+    console.log("Book section ");
 
   }
 
