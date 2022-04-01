@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
 import MainApp from "./MainApp";
 
 function App() {
@@ -8,4 +8,5 @@ function App() {
     <MainApp />
   );
 }
+
 export default App;

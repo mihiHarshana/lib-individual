@@ -28,8 +28,9 @@ const Author: React.FC<AuthorProps> = (props) => {
       props.onDeleteAuthorClick(count - 1);
     })
   }
+
   const onHandleEditClick = (index: number) => {
-    props.onEditAuthorClick(index);
+    onEditAuthorClick(index);
   }
 
   return (
@@ -37,15 +38,16 @@ const Author: React.FC<AuthorProps> = (props) => {
       <Col xs={12} >
         <Row>
           <Col xs={8} md={9}>
-            <h6 className="pt-1"> {count} {author.name}</h6>
+            <h6 className="py-1"> {count} {author.name}</h6>
           </Col>
-          <Col xs={4} md={3} >
-            <Trash2 className="text-danger  trash2 mx-md-1"
-                    onClick={() => onHandleDeleteClick(count - 1)}
-            />
-            <Edit className="text-warning edit px-md-0 me-2"
+          <Col xs={4} md={3} className="d-flex justify-content-end">
+            <Edit className="text-warning edit me-3"
                   onClick={() => onHandleEditClick(count - 1)}
             />
+            <Trash2 className="text-danger trash2 me-3"
+                    onClick={() => onHandleDeleteClick(count - 1)}
+            />
+
           </Col>
         </Row>
       </Col>

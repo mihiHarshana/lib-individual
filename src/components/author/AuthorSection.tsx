@@ -7,35 +7,28 @@ import AuthorList from "./AuthorList";
 import AddAuthor from "./AddAuthor";
 
 type AuthorSectionProps = {
-  books: IBook[];
+  authors: IAuthor[]
   onAuthorListChange: (newAuthors: IAuthor[]) => void;
 };
 
 const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
-  const initAuthors: IAuthor[] = []
-  const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
+  const {authors, onAuthorListChange} = props;
+
   const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor | null>(null);
-  const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
+  const [isAuthorFormVisible, setAuthorFormVisible] = useState(false);
   const [updateIndex, setUpdateIndex] = useState<number | null>(null);
-
-  const { books, onAuthorListChange } = props;
-
-  useEffect(() => {
-    onAuthorListChange(authors)
-  }, [authors]);
-
 
   const handleCreateAuthor = (newAuthor: IAuthor) => {
     const allAuthors: IAuthor[] = authors.slice();
     allAuthors.push(newAuthor);
-    setAuthors(allAuthors);
+    onAuthorListChange(allAuthors);
   }
 
   const handleAuthorDelete = (index: number) => {
-  const allAuthors: IAuthor [] = authors.slice();
-  allAuthors.splice(index, 1);
-  setAuthors(allAuthors);
- }
+    const allAuthors: IAuthor[] = authors.slice();
+    allAuthors.splice(index, 1);
+    onAuthorListChange(allAuthors);
+  }
 
   const onHandleCloseClick = () => {
     setAuthorFormVisible(false);
@@ -46,7 +39,6 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
   }
 
   const onHandleEditClick = (index: number) => {
-    console.log(authors[index]);
     setAuthorToUpdate(authors[index]);
     setUpdateIndex(index);
   }
@@ -57,26 +49,26 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
     }
     const allAuthors: IAuthor[] = authors.slice();
 
-    allAuthors.splice(updateIndex, 1 ,newAuthor);
-    setAuthors(allAuthors);
+    allAuthors.splice(updateIndex, 1, newAuthor);
+    onAuthorListChange(allAuthors);
     setAuthorToUpdate(null);
   }
 
   return (
-      <Row>
-        <AuthorTitle />
-        <AuthorList authors={authors} onDeleteAuthorClick={handleAuthorDelete}
-                    onEditAuthorClick={onHandleEditClick}/>
-        <AddAuthor  onHandleAddClick={onHandleAddClick}/>
-        <Col xs={12} md={10}>
-          <AuthorForm createAuthor={handleCreateAuthor}
-                      isFormVisible={isAuthorFormVisible}
-                      onHandleCloseClick={onHandleCloseClick}
-                      authorToUpdate={authorToUpdate}
-                      updateAuthor={handleUpdateAuthor}
-          />
-        </Col>
-      </Row>
+    <Row className='authors'>
+      <AuthorTitle/>
+      <AuthorList authors={authors} onDeleteAuthorClick={handleAuthorDelete}
+                  onEditAuthorClick={onHandleEditClick}/>
+      <AddAuthor onHandleAddClick={onHandleAddClick}/>
+      <Col xs={12} md={10}>
+        <AuthorForm createAuthor={handleCreateAuthor}
+                    isFormVisible={isAuthorFormVisible}
+                    onHandleCloseClick={onHandleCloseClick}
+                    authorToUpdate={authorToUpdate}
+                    updateAuthor={handleUpdateAuthor}
+        />
+      </Col>
+    </Row>
   )
 }
 

@@ -6,15 +6,15 @@ import BooksSection from "./components/books/BooksSection";
 import Footer from "./components/footer/Footer";
 import {IAuthor, IBook} from "./LibraryTypes";
 
-const MainApp = () => {
+const MainApp: React.FC = () => {
   const [authors, setAuthors] = useState<IAuthor[]>([]);
   const [books, setBooks] = useState<IBook[]>([]);
 
-  const onBookListChange = (newBooks: IBook[]) => {
+  const handleBookListChange = (newBooks: IBook[]) => {
     setBooks(newBooks);
   };
 
-  const onAuthorListChange = (newAuthors: IAuthor[]) => {
+  const handleAuthorListChange = (newAuthors: IAuthor[]) => {
     setAuthors(newAuthors);
   };
 
@@ -26,12 +26,10 @@ const MainApp = () => {
         </Col>
         <Col xs={12} lg={6} className="ps-md-4">
           <BooksSection authors={authors}
-                        onBookListChange={onBookListChange}/>
+                        onBookListChange={handleBookListChange}/>
         </Col>
         <Col xs={12} lg={6} className="px-md-5">
-          <AuthorSection books={books}
-                         onAuthorListChange={onAuthorListChange}
-          />
+          <AuthorSection authors={authors} onAuthorListChange={handleAuthorListChange}/>
         </Col>
         <Col xs={12} >
           <Footer  />
