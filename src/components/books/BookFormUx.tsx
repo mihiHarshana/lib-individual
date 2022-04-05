@@ -52,6 +52,7 @@ const BookFormUx: React.FC<BooksFormProps> = (props) => {
     setBookName(updateBook.name);
     setBookPrice(updateBook.price);
     setBookAuthor(updateBookAuthor);
+    console.log(updateBook.name + ' '  + updateBook.price  + ' ' +  updateBookAuthor );
   }, [updateBook]);
 
 
@@ -69,7 +70,6 @@ const BookFormUx: React.FC<BooksFormProps> = (props) => {
       setBookName("");
       setBookPrice("");
       setBookAuthor(null)
-      console.log("Book createed");
     } else {
       const newBook: IBook = {
         name: bookName,
@@ -85,16 +85,6 @@ const BookFormUx: React.FC<BooksFormProps> = (props) => {
 
   };
 
-/*  useEffect(() => {
-    if (!updateBook) {
-      return;
-    }
-    const updateBookAuthor: AuthorDropDown = {
-      value: updateBook.name,
-      label: updateBook.name,
-    };
-
-  })*/
   return (
     <React.Fragment>
       <Col xs={12} md={10} className="pt-5">
@@ -116,6 +106,7 @@ const BookFormUx: React.FC<BooksFormProps> = (props) => {
                   className="books-field"
                   size={"sm"}
                   required
+                  value={bookName}
                   onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                     handleOnBookNameChanged(ev.target.value)
                   }
@@ -127,6 +118,7 @@ const BookFormUx: React.FC<BooksFormProps> = (props) => {
                   className="books-field"
                   size={"sm"}
                   type="text"
+                  value={bookPrice}
                   required
                   onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
                     handleOnPriceChanged(ev.target.value)

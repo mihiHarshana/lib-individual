@@ -39,7 +39,7 @@ const BooksSection: React.FC<BookSectionProps> = (props) => {
     const allBooks: IBook[] = books.slice();
     allBooks.splice(index -1 , 1);
     setBooks(allBooks);
-    console.log("Book section ");
+
 
   }
 
@@ -62,8 +62,8 @@ const BooksSection: React.FC<BookSectionProps> = (props) => {
   }
 
   const handleOnBookUpdateSet = (index: number) => {
-    setUpdateIndex (index + 1);
-    setUpdateBook(books[index]);
+    setUpdateIndex (index  );
+    setUpdateBook(books[index -1]);
     setIsFormVisible(true);
 
   }
