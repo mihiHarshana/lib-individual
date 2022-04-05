@@ -6,13 +6,15 @@ type AddAuthorProps = {
   onHandleAddClick: () => void;
 }
 
-const AddAuthor:React.FC<AddAuthorProps> = (props) => {
+const AddAuthor: React.FC<AddAuthorProps> = (props) => {
   const {onHandleAddClick} = props;
 
   return (
-    <Col xs={4} md={4} className="mt-2">
-      <Plus className="plus" onClick={onHandleAddClick}/>
-      Add Author
+    <Col xs={12} className="mt-2">
+      <span className="add-item d-flex" onClick={onHandleAddClick}>
+        <Plus className="plus me-1"/>
+        <label>Add Author</label>
+      </span>
     </Col>
   )
 

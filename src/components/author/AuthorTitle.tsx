@@ -1,9 +1,8 @@
 import React from "react";
 import {Col} from "react-bootstrap";
 
-const AuthorTitle = () => {
+const AuthorTitle: React.FC = () => {
   return (
-
     <Col xs={12} className="my-0">
       <h2 className="p-0 m-0 title">Authors</h2>
       <span className="me-xl-5 me-lg-4 me-3">

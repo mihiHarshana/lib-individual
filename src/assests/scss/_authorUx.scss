@@ -1,31 +1,51 @@
-.author:hover {
-  background-color: #f5f5f5;
+.authors, .books {
+  .edit {
+    cursor: pointer;
+    display: none;
+  }
+
+  .trash2 {
+    cursor: pointer;
+    display: none;
+  }
+
+  .author:hover {
+    background-color: #f5f5f5;
+
+    .edit, .trash2 {
+      display: block;
+    }
+  }
+
+  .add-item {
+    cursor: pointer;
+
+    .plus {
+      color: #07449d;
+    }
+
+    label {
+      cursor: pointer;
+      font-weight: 500;
+    }
+  }
+
+  .line {
+    //height: 3px;
+    //opacity: 1;
+    //background-color: $h2-color;
+    border-bottom: 2px solid $h2-color;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 2.2em;
+    color: $h2-color;
+    //border-bottom: 2px solid $h2-color;
+  }
 }
 
-.edit {
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-}
 
-.trash2 {
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-}
-
-.plus {
-  cursor: pointer;
-  color:#07449d;
-}
-.line {
-  height: 3px !important;
-  color: #2B2F32 !important;
-}
-
-.title {
-  font-weight: normal;
-}
 
 @media (max-width: 575.98px) {
   h1 {

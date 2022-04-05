@@ -68,8 +68,7 @@ const BooksSection: React.FC<BookSectionProps> = (props) => {
 
   }
   return (
-    <React.Fragment>
-      <Row>
+      <Row className="books">
         <BookTitle />
         <BookList
           bookList={books}
@@ -86,7 +85,6 @@ const BooksSection: React.FC<BookSectionProps> = (props) => {
           />
         }
       </Row>
-    </React.Fragment>
   );
 };
 

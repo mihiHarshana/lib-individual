@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {IAuthor} from "../../LibraryTypes";
 import {Col} from "react-bootstrap";
 import Author from "./Author";
@@ -13,24 +13,16 @@ const AuthorList: React.FC<AuthorListProps> = (props) => {
 
   const {authors, onDeleteAuthorClick, onEditAuthorClick} = props;
 
-  const ConditionalComponent = () => {
-    const div = authors.length === 0 ?
-      <p className="fst-italic text-muted small mt-0"> No authors listed here.</p>
-      : null;
-    return (
-      <React.Fragment>
-        {div}
-      </React.Fragment>
-    )
+  if (authors.length === 0) {
+    return <p className="fst-italic text-muted small mt-0"> No authors listed here.</p>;
   }
 
   return (
     <Col xs={12} className="mt-0 pt-0">
-      {ConditionalComponent()}
       <ul className="list-unstyled">
         {
           authors.map((author: IAuthor, index: number) =>
-            <li className="author my-2" key={index}>
+            <li className="author py-2 my-1 pb-0" key={index}>
               <Author count={index + 1} author={author}
                       onEditAuthorClick={onEditAuthorClick} onDeleteAuthorClick={onDeleteAuthorClick}
               />
