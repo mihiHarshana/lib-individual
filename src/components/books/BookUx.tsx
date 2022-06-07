@@ -15,13 +15,8 @@ const BookUx: React.FC = () => {
     {name: "book3", index: 3, price: 300 },
   ]
 
-  function handleOnCloseButtonClick() {
-    setIsFormVisible(false);
-  }
 
-  function handleOnAddButtonClick () {
-    setIsFormVisible(true);
-  }
+
 
   return (
     <React.Fragment>
@@ -31,11 +26,6 @@ const BookUx: React.FC = () => {
             <Book book={book} key={index} index={index}/>
           )
         }
-        </Col>
-          <AddBook onHandleAddClick={handleOnAddButtonClick} />
-        <Col xs={12}  >
-          {isFormVisible &&
-          <BookFormUx onCloseClick={handleOnCloseButtonClick}/> }
         </Col>
       </Row>
     </React.Fragment>

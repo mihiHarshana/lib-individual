@@ -5,6 +5,7 @@ import Select from "react-select";
 
 type BookFormProps = {
   onCloseClick: () => void;
+  isFormVisible: boolean;
 }
 
 const options = [
@@ -13,15 +14,21 @@ const options = [
   { value: 'author3', label: 'Author 3' }
 ]
 
-const BookFormUx: React.FC<BookFormProps> = (BookFormProps) => {
+
+
+const BookFormUx: React.FC<BookFormProps> = (props) => {
+  const {isFormVisible,onCloseClick} = props;
+
   return (
+
+    (isFormVisible === true  ?
     <React.Fragment>
       <Row>
         <Col xs={8} md={9}  className="mt-3 ms-md-1">
           <h3>Create Book</h3>
         </Col>
         <Col xs={4} md={1}  className="mt-3 pe-md-3 text-end">
-          <XCircle className="c-circle "/>
+          <XCircle className="c-circle " onClick={onCloseClick}/>
         </Col>
       </Row>
       <Row>
@@ -46,6 +53,8 @@ const BookFormUx: React.FC<BookFormProps> = (BookFormProps) => {
         </Col>
       </Row>
     </React.Fragment>
+      :
+    <React.Fragment />)
   )
 }
 
