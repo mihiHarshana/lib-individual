@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import {Edit, Edit2, Plus, Trash2} from "react-feather";
 import {IBook} from "../../LibraryTypes";
@@ -8,6 +8,7 @@ type BookProps = {
   book: IBook;
   index: number;
 }
+
 
 function onhandleClick() {
   Swal.fire({
@@ -24,6 +25,7 @@ function onhandleClick() {
     }
   })
 }
+
 
 const Book: React.FC<BookProps> = (props) => {
   return (

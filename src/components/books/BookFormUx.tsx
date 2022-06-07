@@ -3,13 +3,17 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import Select from "react-select";
 
+type BookFormProps = {
+  onCloseClick: () => void;
+}
+
 const options = [
   { value: 'author1', label: 'Author 1' },
   { value: 'authro2', label: 'Author 2' },
   { value: 'author3', label: 'Author 3' }
 ]
 
-const BookFormUx = () => {
+const BookFormUx: React.FC<BookFormProps> = (BookFormProps) => {
   return (
     <React.Fragment>
       <Row>

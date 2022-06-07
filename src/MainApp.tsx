@@ -4,6 +4,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import AuthorSection from "./components/author/AuthorSection";
 import BookUx from "./components/books/BookUx";
 import Footer from "./components/footer/Footer";
+import BookSection from "./components/books/BookSection";
 
 const MainApp = () => {
   return (
@@ -13,7 +14,7 @@ const MainApp = () => {
           <Welcome />
         </Col>
         <Col xs={12} lg={6}>
-         {/* <BookUx />*/}
+         <BookSection />
         </Col>
         <Col xs={12} lg={6} className="px-md-5">
           <AuthorSection />
