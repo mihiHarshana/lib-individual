@@ -6,21 +6,35 @@ import {Plus} from "react-feather";
 import BookFormUx from "./BookFormUx";
 import AddBook from "./AddBook";
 
-const BookUx: React.FC = () => {
+type BookListProps = {
+  books: IBook[];
+/*  onDeleteAuthorClick: (index: number) => void;
+  onEditAuthorClick: (index: number) => void;*/
+}
+
+const BookUx: React.FC<BookListProps> = (props) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  const books: IBook[] = [
-    {name: "book1", index: 1, price: 100 },
-    {name: "book2", index: 2, price: 200 },
-    {name: "book3", index: 3, price: 300 },
-  ]
 
 
+  const {books } = props;
+
+  const ConditionalComponent = () => {
+    const div = books.length === 0 ?
+      <p className="fst-italic text-muted small mt-0"> No books listed here.</p>
+      : null;
+    return (
+      <React.Fragment>
+        {div}
+      </React.Fragment>
+    )
+  }
 
 
   return (
     <React.Fragment>
       <Row>
+        {ConditionalComponent()}
         <Col xs={12}  className="ms-md-2 ms-1"> {
           books.map((book: IBook, index: number) =>
             <Book book={book} key={index} index={index}/>
