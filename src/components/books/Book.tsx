@@ -7,27 +7,27 @@ import Swal from 'sweetalert2'
 type BookProps = {
   book: IBook;
   index: number;
+
+  onDeleteBookClick: (index: number) => void;
 }
-
-
-function onhandleClick() {
-  Swal.fire({
-    title: 'Do you want to Delete the Book?',
-    showDenyButton:true,
-    confirmButtonText: 'Delete',
-    denyButtonText: `Cancel`,
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      //Actions to be performed here
-    } else if (result.isDenied) {
-      //Action to be performed here
-    }
-  })
-}
-
-
 const Book: React.FC<BookProps> = (props) => {
+  const {index, onDeleteBookClick, book} = props;
+
+  const onhandleDeleteClick = (index: number) => {
+    Swal.fire({
+      title: 'Do you want to delete the Book - ' + book.name + ' ? ',
+      showDenyButton: true,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      if (!result.isConfirmed) {
+        return;
+      }
+      onDeleteBookClick(index - 1);
+    })
+  }
+
+
   return (
     <React.Fragment>
       <Row>
@@ -37,7 +37,8 @@ const Book: React.FC<BookProps> = (props) => {
              {props.index} {props.book.name}
            </Col>
            <Col xs={4} md={3}>
-             <Trash2 className="text-danger float-end trash2  py-1 me-2" onClick={onhandleClick}/>
+             <Trash2 className="text-danger float-end trash2  py-1 me-2"
+                     onClick={() => onhandleDeleteClick(index - 1)}/>
              <Edit className="text-warning float-end edit py-1 px-md-0  " />
            </Col>
          </Row>

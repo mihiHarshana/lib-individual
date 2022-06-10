@@ -5,7 +5,7 @@ export interface IAuthor {
 
 export interface IBook {
   name: string;
-  index: number;
-  price: number;
+  price: string;
+  author: string;
 
 }

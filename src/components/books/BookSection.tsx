@@ -25,12 +25,20 @@ const BookSection: React.FC = () => {
     setIsFormVisible(false);
   }
 
+  const onHandleAuthorDelete = (index: number) => {
+    const allBooks: IBook [] = books.slice();
+    allBooks.splice(index, 1);
+    setBooks(allBooks);
+  }
+
   return (
     <Row>
       <BookTitle />
-      <BookUx books={books} />
+      <BookUx books={books} onDeleteBookClick={onHandleAuthorDelete}/>
       <AddBook onAddClick={handleOnAddButtonClick} />
-      <BookFormUx onCloseClick={onHandleCloseClick} isFormVisible={isFormVisible}/>
+      <BookFormUx onCloseClick={onHandleCloseClick} isFormVisible={isFormVisible} createBook={handleCreateBook}
+                  books={books}
+      />
     </Row>
   )
 }
