@@ -1,29 +1,30 @@
-import React, {FormEvent, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import Select from "react-select";
-import {IAuthor, IBook} from "../../LibraryTypes";
+import {AuthorDropDown, IAuthor, IBook} from "../../LibraryTypes";
 import Swal from "sweetalert2";
+
 
 type BookFormProps = {
   onCloseClick: () => void;
   isFormVisible: boolean;
   createBook: (book: IBook) =>void;
-  books: IBook[];
+  updateBook: IBook | null;
+  authorList: IAuthor[];
+  deleteBook: (index: number) => void;
+  onBookUpdateSet: (index: number ) => void;
+  onBookUpdate: (newBook: IBook) => void;
 }
-
-const options = [
-  { value: 'author1', label: 'Author 1' },
-  { value: 'authro2', label: 'Author 2' },
-  { value: 'author3', label: 'Author 3' }
-]
 
 const BookFormUx: React.FC<BookFormProps> = (props) => {
   const [bookName, setBookName] = useState<string>("");
   const [bookPrice, setBookPrice] = useState<string>("");
-  const [bookAuthor, setBookAuthor] = useState<string>("");
+  const [bookAuthor, setBookAuthor] = useState<AuthorDropDown | null>(null);
 
-  const {isFormVisible,onCloseClick, books , createBook} = props;
+  const [bookToUpdate, setBookToUpdate] = useState<string>("");
+
+  const {isFormVisible,onCloseClick, updateBook , createBook, authorList, onBookUpdateSet, onBookUpdate} = props;
 
   const handleBookNameChange = (name: string) => {
     setBookName(name);
@@ -31,24 +32,63 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
   const handleBookPriceChange = (price: string) => {
     setBookPrice(price);
   }
-  const handleBookAuthorChange = (author: string) => {
-    setBookAuthor(author)
-  }
-  const handleBookCreate = (event: FormEvent) =>{
-    event.preventDefault();
-    if (books === null) {
+
+  const authors = authorList.map((author: IAuthor) => {
+    console.log(author.name);
+    return {value: author.name, label: author.name}
+  });
+
+  const handleOnBookAuthorChanged = (author: AuthorDropDown | null) => {
+    if (!author) {
       return;
     }
+    setBookAuthor(author);
+  //  setBookAuthorValid("yes");
+  };
 
-    const newBook: IBook = {
-      name: bookName,
-      price: bookPrice,
-      author: bookAuthor
+  useEffect(() => {
+    if (!updateBook) {
+      return;
+    }
+    const updateBookAuthor: AuthorDropDown = {
+      value: updateBook.author,
+      label: updateBook.author,
     };
-    createBook(newBook);
-    setBookName("");
-    setBookAuthor("")
-    setBookPrice("");
+    setBookName(updateBook.name);
+    setBookPrice(updateBook.price);
+    setBookAuthor(updateBookAuthor);
+  }, [updateBook]);
+
+  const handleBookCreate = (event: FormEvent) =>{
+    console.log("Inistialtion handle book create")
+   event.preventDefault();
+    /*   if (updateBook === null) {
+        return;
+      }*/
+    console.log("Handle Book Create");
+    if (!bookName || !bookPrice || !bookAuthor  ) {
+      return;
+    } else if ( updateBook) {
+      const newBook:IBook =  {
+        name: bookName,
+        price: bookPrice,
+        author: bookAuthor.value,
+      }
+      onBookUpdate(newBook);
+      setBookName("");
+      setBookAuthor(null);
+      setBookPrice("");
+    } else {
+      const newBook: IBook = {
+        name: bookName,
+        price: bookPrice,
+        author: bookAuthor.value
+      };
+      createBook(newBook);
+      setBookName("");
+      setBookAuthor(null)
+      setBookPrice("");
+    }
   }
 
   const showMessage = (message: string, authorname: string) => {
@@ -64,7 +104,7 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
     <React.Fragment>
       <Row>
         <Col xs={8} md={9}  className="mt-3 ms-md-1">
-          <h3>Create Book</h3>
+          <h3>{ (updateBook) ? 'Update' : 'Create'} Book</h3>
         </Col>
         <Col xs={4} md={1}  className="mt-3 pe-md-3 text-end">
           <XCircle className="c-circle " onClick={onCloseClick}/>
@@ -97,16 +137,18 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
             </Form.Group>
             <Form.Group className="mb-1" controlId="form">
               <Form.Label  className="book-label">Author</Form.Label>
-              <Select
-                options={options} isClearable
-                //TODO
-
-                />
-
-
+            <Select
+                options={authors}
+                isSearchable={true}
+                isClearable={true}
+                value={bookAuthor}
+                onChange={(selected: AuthorDropDown | null) => {
+                  handleOnBookAuthorChanged(selected);
+                }}
+              />
             </Form.Group>
             <Button variant="primary" type="submit" className="create-button float-end mt-3 px-4 py-1" >
-              Create
+              { (updateBook) ? 'Update' : 'Create'}
             </Button>
           </Form>
         </Col>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import {IAuthor} from "../../LibraryTypes";
 import AuthorForm from "./AuthorForm";
@@ -6,12 +6,22 @@ import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
 import AddAuthor from "./AddAuthor";
 
-const AuthorSection: React.FC = () => {
+type AuthorSectionProps = {
+  onAuthorListChange: (newAuthors: IAuthor[]) => void;
+}
+
+const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
   const initAuthors: IAuthor[] = []
   const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
-  const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor | null>(null);
+  const [updateAuthor, setUpdateAuthor] = useState<IAuthor | null>(null);
   const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
   const [updateIndex, setUpdateIndex] = useState<number | null>(null);
+
+  const {onAuthorListChange} = props;
+
+  useEffect(() => {
+    onAuthorListChange(authors)
+  }, [authors]);
 
 
   const handleCreateAuthor = (newAuthor: IAuthor) => {
@@ -32,11 +42,13 @@ const AuthorSection: React.FC = () => {
 
   const onHandleAddClick = () => {
     setAuthorFormVisible(true);
+    setUpdateAuthor(null);
+    setUpdateIndex(null);
   }
 
   const onHandleEditClick = (index: number) => {
     console.log(authors[index]);
-    setAuthorToUpdate(authors[index]);
+    setUpdateAuthor(authors[index]);
     setUpdateIndex(index);
   }
 
@@ -48,7 +60,7 @@ const AuthorSection: React.FC = () => {
 
     allAuthors.splice(updateIndex, 1 ,newAuthor);
     setAuthors(allAuthors);
-    setAuthorToUpdate(null);
+    setUpdateAuthor(null);
   }
 
   return (
@@ -61,8 +73,8 @@ const AuthorSection: React.FC = () => {
           <AuthorForm createAuthor={handleCreateAuthor}
                       isFormVisible={isAuthorFormVisible}
                       onHandleCloseClick={onHandleCloseClick}
-                      authorToUpdate={authorToUpdate}
-                      updateAuthor={handleUpdateAuthor}
+                      updateAuthor={updateAuthor}
+                      onAuthorUpdate={handleUpdateAuthor}
           />
         </Col>
       </Row>

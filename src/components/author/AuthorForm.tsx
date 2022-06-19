@@ -8,20 +8,21 @@ type AuthorFormUxProps = {
   createAuthor: (author: IAuthor) =>void;
   isFormVisible: boolean;
   onHandleCloseClick:  () =>void;
-  authorToUpdate: IAuthor | null;
-  updateAuthor: (author: IAuthor) =>void;
+  updateAuthor: IAuthor | null;
+  onAuthorUpdate: (author: IAuthor) =>void;
 }
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [authorName, setAuthorName] = useState<string>("");
-  const {isFormVisible, onHandleCloseClick, authorToUpdate } = props;
+  const {isFormVisible, onHandleCloseClick, onAuthorUpdate, updateAuthor, createAuthor } = props;
 
   useEffect(() => {
     // Update the document title using the browser API
-    if (authorToUpdate != null) {
-      setAuthorName(authorToUpdate.name)
+    if (!updateAuthor) {
+      return;
     }
-  },[authorToUpdate] );
+    setAuthorName(updateAuthor.name);
+  },[updateAuthor] );
 
 
   const handleChange = (name: string) => {
@@ -33,17 +34,17 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     if (!authorName ) {
       return;
     }
-    if (authorToUpdate != null) {
+    if (updateAuthor) {
       let newAuthor:IAuthor;
       newAuthor = {name:authorName, index:1  }
-      props.updateAuthor(newAuthor);
+      onAuthorUpdate(newAuthor);
       setAuthorName("");
       showMessage("Updated ", newAuthor.name)
 
     } else {
       let newAuthor:IAuthor;
       newAuthor = {name:authorName, index:1  }
-      props.createAuthor(newAuthor);
+      createAuthor(newAuthor);
       setAuthorName("");
       showMessage("Created ", newAuthor.name)
     }
@@ -62,7 +63,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
       ?  <React.Fragment>
         <Row>
           <Col xs={8} md={8}className="mt-4 ">
-            <h4>{ (authorToUpdate === null) ? 'Create ' : 'Update '} Author </h4>
+            <h4>{ (updateAuthor === null) ? 'Create ' : 'Update '} Author </h4>
           </Col>
           <Col xs={4} md={2} className="mt-4 text-end pe-md-5" >
             <XCircle className="c-circle" onClick={onHandleCloseClick}  />
@@ -83,7 +84,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
                 }
               />
               <Button  type="submit" className="create-button float-end mt-2 px-4 py-1" >
-                { (authorToUpdate === null) ? 'Create' : 'Update'}
+                { (updateAuthor === null) ? 'Create' : 'Update'}
               </Button>
             </Form>
           </Col>

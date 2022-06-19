@@ -9,7 +9,7 @@ import AddBook from "./AddBook";
 type BookListProps = {
   books: IBook[];
   onDeleteBookClick: (index: number) => void;
-  /* onEditAuthorClick: (index: number) => void;*/
+  onEditAuthorClick: (index: number) => void;
 }
 
 const BookUx: React.FC<BookListProps> = (props) => {
@@ -17,7 +17,7 @@ const BookUx: React.FC<BookListProps> = (props) => {
 
 
 
-  const {books, onDeleteBookClick } = props;
+  const {books, onDeleteBookClick, onEditAuthorClick } = props;
 
   const ConditionalComponent = () => {
     const div = books.length === 0 ?
@@ -37,7 +37,8 @@ const BookUx: React.FC<BookListProps> = (props) => {
         {ConditionalComponent()}
         <Col xs={12}  className="ms-md-2 ms-1"> {
           books.map((book: IBook, index: number) =>
-            <Book book={book} key={index} index={index} onDeleteBookClick={()=>onDeleteBookClick (index -1 )}/>
+            <Book book={book} key={index} index={index} onDeleteBookClick={()=>onDeleteBookClick (index -1 )}
+            onEditBookClick={() => onEditAuthorClick (index -1 ) }/>
           )
         }
         </Col>

@@ -9,3 +9,8 @@ export interface IBook {
   author: string;
 
 }
+
+export interface AuthorDropDown {
+  value: string;
+  label: string;
+}

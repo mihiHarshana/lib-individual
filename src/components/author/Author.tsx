@@ -29,8 +29,9 @@ const Author: React.FC<AuthorProps> = (props) => {
     })
   }
   const onHandleEditClick = (index: number) => {
-    props.onEditAuthorClick(index);
+    onEditAuthorClick(index);
   }
+
 
   return (
     <Row>
