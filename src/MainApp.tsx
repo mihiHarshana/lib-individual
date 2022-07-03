@@ -6,6 +6,8 @@ import BookUx from "./components/books/BookUx";
 import Footer from "./components/footer/Footer";
 import BookSection from "./components/books/BookSection";
 import {IAuthor} from "./LibraryTypes";
+import {useSelector} from "react-redux";
+import {useAppSelector} from "./redux/hooks";
 
 const MainApp = () => {
 
@@ -15,6 +17,10 @@ const MainApp = () => {
 
 
   const [authors, setAuthors] = useState<IAuthor[]>([]);
+
+  const authorss = useAppSelector((state) => state.library.authors)
+  console.log("reducx --" + authorss);
+
   return (
     <Container fluid>
       <Row>
@@ -22,7 +28,7 @@ const MainApp = () => {
           <Welcome />
         </Col>
         <Col xs={12} lg={6}>
-         <BookSection authors={authors}/>
+         <BookSection authors={authorss}/>
         </Col>
         <Col xs={12} lg={6} className="px-md-5">
           <AuthorSection onAuthorListChange={onAuthorListChange} />
