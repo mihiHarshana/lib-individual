@@ -36,14 +36,14 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     }
     if (updateAuthor) {
       let newAuthor:IAuthor;
-      newAuthor = {name:authorName, index:1  }
+      newAuthor = {name:authorName }
       onAuthorUpdate(newAuthor);
       setAuthorName("");
       showMessage("Updated ", newAuthor.name)
 
     } else {
       let newAuthor:IAuthor;
-      newAuthor = {name:authorName, index:1  }
+      newAuthor = {name:authorName  }
       createAuthor(newAuthor);
       setAuthorName("");
       showMessage("Created ", newAuthor.name)

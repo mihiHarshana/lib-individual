@@ -5,6 +5,8 @@ import AuthorForm from "./AuthorForm";
 import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
 import AddAuthor from "./AddAuthor";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {addAuthor} from "../../redux/reducers/librarySlice";
 
 type AuthorSectionProps = {
   onAuthorListChange: (newAuthors: IAuthor[]) => void;
@@ -12,12 +14,17 @@ type AuthorSectionProps = {
 
 const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
   const initAuthors: IAuthor[] = []
-  const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
+  //const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
   const [updateAuthor, setUpdateAuthor] = useState<IAuthor | null>(null);
   const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
   const [updateIndex, setUpdateIndex] = useState<number | null>(null);
 
   const {onAuthorListChange} = props;
+
+  const authors: IAuthor[] = useAppSelector(state => state.library.authors)
+
+  //applying redux
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     onAuthorListChange(authors)
@@ -25,15 +32,20 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
 
 
   const handleCreateAuthor = (newAuthor: IAuthor) => {
-    const allAuthors: IAuthor[] = authors.slice();
-    allAuthors.push(newAuthor);
-    setAuthors(allAuthors);
+   // const newAuthors = [...authors, newAuthor];
+
+   // const allAuthors: IAuthor[] = authors.slice();
+   // allAuthors.push(newAuthor);
+   // setAuthors(allAuthors);
+     dispatch(addAuthor(newAuthor));
+
+
   }
 
   const handleAuthorDelete = (index: number) => {
   const allAuthors: IAuthor [] = authors.slice();
   allAuthors.splice(index, 1);
-  setAuthors(allAuthors);
+ // setAuthors(allAuthors);
  }
 
   const onHandleCloseClick = () => {
@@ -59,7 +71,7 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
     const allAuthors: IAuthor[] = authors.slice();
 
     allAuthors.splice(updateIndex, 1 ,newAuthor);
-    setAuthors(allAuthors);
+ //   setAuthors(allAuthors);
     setUpdateAuthor(null);
   }
 

@@ -7,7 +7,9 @@ import Footer from "./components/footer/Footer";
 import BookSection from "./components/books/BookSection";
 import {IAuthor} from "./LibraryTypes";
 import {useSelector} from "react-redux";
-import {useAppSelector} from "./redux/hooks";
+import {useAppDispatch, useAppSelector} from "./redux/hooks";
+import {addAuthor} from "./redux/reducers/librarySlice";
+import Author from "./components/author/Author";
 
 const MainApp = () => {
 
@@ -20,6 +22,9 @@ const MainApp = () => {
 
   const authorss = useAppSelector((state) => state.library.authors)
   console.log("reducx --" + authorss);
+
+  const dispatch  = useAppDispatch();
+
 
   return (
     <Container fluid>

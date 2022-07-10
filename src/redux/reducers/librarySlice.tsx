@@ -7,7 +7,7 @@ interface initialStateType {
   authors: IAuthor[]
 }
 const  initialState: initialStateType = {
-  authors: [{name: 'Mihindu' , index: 1}, {name: 'test2' , index: 1}]
+  authors: []
 }
 
 export const librarySlice = createSlice({
@@ -15,15 +15,12 @@ export const librarySlice = createSlice({
   initialState,
   reducers: {
     addAuthor: (state, action:PayloadAction<IAuthor>) =>{
-
-
-    }
+      const newAuthors = [...state.authors, action.payload];
+      state.authors = newAuthors;
+    },
+    //deleteAuthor: ()
   }
 });
 
 export const {addAuthor} =librarySlice.actions;
 export default librarySlice.reducer;
-
-/*  //sliceName
-  //initialStae
-  //reduces*/
