@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 import {IAuthor} from "../../LibraryTypes";
+import {isNumber} from "util";
 
 
 interface initialStateType {
@@ -18,9 +19,13 @@ export const librarySlice = createSlice({
       const newAuthors = [...state.authors, action.payload];
       state.authors = newAuthors;
     },
-    //deleteAuthor: ()
+    deleteAuthor: (state , action:PayloadAction<number>) => {
+        console.log (state.authors.length)
+      const newAuthor: IAuthor [] = state.authors.splice(action.payload);
+        state.authors = newAuthor;
+    }
   }
 });
 
-export const {addAuthor} =librarySlice.actions;
+export const {addAuthor, deleteAuthor} =librarySlice.actions;
 export default librarySlice.reducer;

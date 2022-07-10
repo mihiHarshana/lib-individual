@@ -6,7 +6,8 @@ import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
 import AddAuthor from "./AddAuthor";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {addAuthor} from "../../redux/reducers/librarySlice";
+import {addAuthor, deleteAuthor} from "../../redux/reducers/librarySlice";
+import {isNumber} from "util";
 
 type AuthorSectionProps = {
   onAuthorListChange: (newAuthors: IAuthor[]) => void;
@@ -43,9 +44,11 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
   }
 
   const handleAuthorDelete = (index: number) => {
-  const allAuthors: IAuthor [] = authors.slice();
-  allAuthors.splice(index, 1);
+
+/*  const allAuthors: IAuthor [] = authors.slice();
+  allAuthors.splice(index, 1);*/
  // setAuthors(allAuthors);
+    dispatch(deleteAuthor(index));
  }
 
   const onHandleCloseClick = () => {
@@ -59,7 +62,6 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
   }
 
   const onHandleEditClick = (index: number) => {
-    console.log(authors[index]);
     setUpdateAuthor(authors[index]);
     setUpdateIndex(index);
   }
