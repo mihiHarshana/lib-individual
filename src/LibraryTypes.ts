@@ -13,3 +13,8 @@ export interface AuthorDropDown {
   value: string;
   label: string;
 }
+
+export interface UpdateAuthor {
+  author: IAuthor;
+  index: number;
+}

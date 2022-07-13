@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
-import {IAuthor} from "../../LibraryTypes";
+import {IAuthor, UpdateAuthor} from "../../LibraryTypes";
 import {isNumber} from "util";
 
 
 interface initialStateType {
-  authors: IAuthor[]
+  authors: IAuthor[];
+  updatedIndex: number;
 }
 const  initialState: initialStateType = {
-  authors: []
+  authors: [],
+  updatedIndex: -1
 }
 
 export const librarySlice = createSlice({
@@ -19,13 +21,20 @@ export const librarySlice = createSlice({
       const newAuthors = [...state.authors, action.payload];
       state.authors = newAuthors;
     },
+
     deleteAuthor: (state , action:PayloadAction<number>) => {
-        console.log (state.authors.length)
-      const newAuthor: IAuthor [] = state.authors.splice(action.payload);
-        state.authors = newAuthor;
+      const newAuthor: IAuthor [] = state.authors.splice(action.payload, 1);
+      state.authors = newAuthor;
+    },
+
+    updateAuthor1: (state, action:PayloadAction<UpdateAuthor>) => {
+      const updatedAuthors: IAuthor[] = state.authors.slice();
+      updatedAuthors.splice(action.payload.index, 1, action.payload.author);
+      state.authors = updatedAuthors;
     }
+
   }
 });
 
-export const {addAuthor, deleteAuthor} =librarySlice.actions;
+export const {addAuthor, deleteAuthor, updateAuthor1} =librarySlice.actions;
 export default librarySlice.reducer;

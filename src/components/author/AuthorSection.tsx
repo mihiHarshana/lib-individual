@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
-import {IAuthor} from "../../LibraryTypes";
+import {IAuthor, UpdateAuthor} from "../../LibraryTypes";
 import AuthorForm from "./AuthorForm";
 import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
 import AddAuthor from "./AddAuthor";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {addAuthor, deleteAuthor} from "../../redux/reducers/librarySlice";
+import {addAuthor, deleteAuthor, updateAuthor1} from "../../redux/reducers/librarySlice";
 import {isNumber} from "util";
+import {useSelector} from "react-redux";
 
 type AuthorSectionProps = {
   onAuthorListChange: (newAuthors: IAuthor[]) => void;
@@ -33,21 +34,10 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
 
 
   const handleCreateAuthor = (newAuthor: IAuthor) => {
-   // const newAuthors = [...authors, newAuthor];
-
-   // const allAuthors: IAuthor[] = authors.slice();
-   // allAuthors.push(newAuthor);
-   // setAuthors(allAuthors);
      dispatch(addAuthor(newAuthor));
-
-
   }
 
   const handleAuthorDelete = (index: number) => {
-
-/*  const allAuthors: IAuthor [] = authors.slice();
-  allAuthors.splice(index, 1);*/
- // setAuthors(allAuthors);
     dispatch(deleteAuthor(index));
  }
 
@@ -70,11 +60,8 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
     if (updateIndex === null) {
       return;
     }
-    const allAuthors: IAuthor[] = authors.slice();
-
-    allAuthors.splice(updateIndex, 1 ,newAuthor);
- //   setAuthors(allAuthors);
-    setUpdateAuthor(null);
+    const updatedAuthor: UpdateAuthor = {author: newAuthor , index: updateIndex}
+    dispatch(updateAuthor1(updatedAuthor));
   }
 
   return (
