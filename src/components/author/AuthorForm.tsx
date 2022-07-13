@@ -3,9 +3,10 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor} from "../../LibraryTypes";
 import Swal from "sweetalert2";
+import {useAppDispatch} from "../../redux/hooks";
+import {addAuthor} from "../../redux/reducers/librarySlice";
 
 type AuthorFormUxProps = {
-  createAuthor: (author: IAuthor) =>void;
   isFormVisible: boolean;
   onHandleCloseClick:  () =>void;
   updateAuthor: IAuthor | null;
@@ -14,7 +15,10 @@ type AuthorFormUxProps = {
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [authorName, setAuthorName] = useState<string>("");
-  const {isFormVisible, onHandleCloseClick, onAuthorUpdate, updateAuthor, createAuthor } = props;
+  const {isFormVisible, onHandleCloseClick, onAuthorUpdate, updateAuthor } = props;
+
+  //Applying redux
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -44,7 +48,10 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     } else {
       let newAuthor:IAuthor;
       newAuthor = {name:authorName  }
-      createAuthor(newAuthor);
+     // createAuthor(newAuthor);
+
+
+      dispatch(addAuthor(newAuthor));
       setAuthorName("");
       showMessage("Created ", newAuthor.name)
     }

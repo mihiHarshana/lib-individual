@@ -7,8 +7,6 @@ import AuthorList from "./AuthorList";
 import AddAuthor from "./AddAuthor";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {addAuthor, deleteAuthor, updateAuthor1} from "../../redux/reducers/librarySlice";
-import {isNumber} from "util";
-import {useSelector} from "react-redux";
 
 type AuthorSectionProps = {
   onAuthorListChange: (newAuthors: IAuthor[]) => void;
@@ -71,7 +69,13 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
                     onEditAuthorClick={onHandleEditClick}/>
         <AddAuthor  onHandleAddClick={onHandleAddClick}/>
         <Col xs={12} md={10}>
-          <AuthorForm createAuthor={handleCreateAuthor}
+{/*          <AuthorForm createAuthor={handleCreateAuthor}
+                      isFormVisible={isAuthorFormVisible}
+                      onHandleCloseClick={onHandleCloseClick}
+                      updateAuthor={updateAuthor}
+                      onAuthorUpdate={handleUpdateAuthor}*/}
+
+          <AuthorForm
                       isFormVisible={isAuthorFormVisible}
                       onHandleCloseClick={onHandleCloseClick}
                       updateAuthor={updateAuthor}
