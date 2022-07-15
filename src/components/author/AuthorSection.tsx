@@ -58,6 +58,7 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
   const onHandleEditClick = (index: number) => {
    // setUpdateAuthor(authors[index]);
    // setUpdateIndex(index);
+    setAuthorFormVisible(true);
     dispatch(authorIndex(index));
   }
 
