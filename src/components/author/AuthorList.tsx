@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {IAuthor} from "../../LibraryTypes";
 import {Col} from "react-bootstrap";
 import Author from "./Author";
-import {useDispatch} from "react-redux";
 
 type AuthorListProps = {
   authors: IAuthor[];
@@ -13,8 +12,6 @@ type AuthorListProps = {
 const AuthorList: React.FC<AuthorListProps> = (props) => {
 
   const {authors, onDeleteAuthorClick, onEditAuthorClick} = props;
-
-
 
   const ConditionalComponent = () => {
 

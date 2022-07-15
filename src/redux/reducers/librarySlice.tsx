@@ -3,12 +3,12 @@ import {IAuthor, IBook, UpdateAuthor} from "../../LibraryTypes";
 
 interface initialStateType {
   authors: IAuthor[];
-  updatedIndex: number;
+  authorIndex: number;
   books: IBook[];
 }
 const  initialState: initialStateType = {
   authors: [],
-  updatedIndex: -1,
+  authorIndex: -1,
   books: []
 }
 
@@ -22,14 +22,21 @@ export const librarySlice = createSlice({
     },
 
     deleteAuthor: (state , action:PayloadAction<number>) => {
-      const newAuthor: IAuthor [] = state.authors.splice(action.payload, 1);
-      state.authors = newAuthor;
+        const newAuthor: IAuthor[] = state.authors.slice();
+        newAuthor.splice(action.payload, 1);
+        state.authors = newAuthor;
+      //const newAuthor: IAuthor [] = state.authors.splice(action.payload, 1);
+      //state.authors = newAuthor;
     },
 
     updateAuthor1: (state, action:PayloadAction<UpdateAuthor>) => {
       const updatedAuthors: IAuthor[] = state.authors.slice();
       updatedAuthors.splice(action.payload.index, 1, action.payload.author);
       state.authors = updatedAuthors;
+    },
+
+    authorIndex: (state, action:PayloadAction<number>) => {
+      state.authorIndex = action.payload;
     },
 
     addBook: (state, action:PayloadAction<IBook>) => {
@@ -39,5 +46,5 @@ export const librarySlice = createSlice({
   }
 });
 
-export const {addAuthor, deleteAuthor, updateAuthor1, addBook} =librarySlice.actions;
+export const {addAuthor, deleteAuthor, updateAuthor1, authorIndex , addBook} =librarySlice.actions;
 export default librarySlice.reducer;

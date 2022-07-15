@@ -3,7 +3,7 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor} from "../../LibraryTypes";
 import Swal from "sweetalert2";
-import {useAppDispatch} from "../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {addAuthor} from "../../redux/reducers/librarySlice";
 
 type AuthorFormUxProps = {
@@ -17,6 +17,8 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [authorName, setAuthorName] = useState<string>("");
   const {isFormVisible, onHandleCloseClick, onAuthorUpdate, updateAuthor } = props;
 
+  const tempAuthor: IAuthor [] = useAppSelector(state => state.library.authors)
+  const tempAuthorIndex: number = useAppSelector(state => state.library.authorIndex)
   //Applying redux
   const dispatch = useAppDispatch();
 
@@ -28,6 +30,13 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     setAuthorName(updateAuthor.name);
   },[updateAuthor] );
 
+  useEffect(() => {
+    // Update the document title using the browser API
+    if (tempAuthorIndex === -1) {
+      return;
+    }
+    setAuthorName(tempAuthor[tempAuthorIndex].name);
+  },[tempAuthorIndex] );
 
   const handleChange = (name: string) => {
       setAuthorName(name);
@@ -38,7 +47,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     if (!authorName ) {
       return;
     }
-    if (updateAuthor) {
+    if (tempAuthorIndex !== -1) {
       let newAuthor:IAuthor;
       newAuthor = {name:authorName }
       onAuthorUpdate(newAuthor);
@@ -48,9 +57,6 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     } else {
       let newAuthor:IAuthor;
       newAuthor = {name:authorName  }
-     // createAuthor(newAuthor);
-
-
       dispatch(addAuthor(newAuthor));
       setAuthorName("");
       showMessage("Created ", newAuthor.name)
@@ -64,13 +70,12 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     )
   }
 
-
   return (
     (isFormVisible === true
       ?  <React.Fragment>
         <Row>
           <Col xs={8} md={8}className="mt-4 ">
-            <h4>{ (updateAuthor === null) ? 'Create ' : 'Update '} Author </h4>
+            <h4>{ (tempAuthorIndex === -1) ? 'Create ' : 'Update '} Author </h4>
           </Col>
           <Col xs={4} md={2} className="mt-4 text-end pe-md-5" >
             <XCircle className="c-circle" onClick={onHandleCloseClick}  />
@@ -86,12 +91,13 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
                 required
                 size={"sm"}
                 value={authorName}
+
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                   handleChange(event.target.value)
                 }
               />
               <Button  type="submit" className="create-button float-end mt-2 px-4 py-1" >
-                { (updateAuthor === null) ? 'Create' : 'Update'}
+                { (tempAuthorIndex === -1) ? 'Create' : 'Update'}
               </Button>
             </Form>
           </Col>

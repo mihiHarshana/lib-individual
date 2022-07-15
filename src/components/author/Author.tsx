@@ -3,6 +3,7 @@ import {Col, Row} from "react-bootstrap";
 import {Edit, Trash2} from "react-feather";
 import {IAuthor} from "../../LibraryTypes";
 import Swal from 'sweetalert2'
+import {useAppSelector} from "../../redux/hooks";
 
 type AuthorProps = {
   author: IAuthor;
