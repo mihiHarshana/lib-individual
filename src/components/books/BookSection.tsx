@@ -5,6 +5,8 @@ import AddBook from "./AddBook";
 import {useState} from "react";
 import BookFormUx from "./BookFormUx";
 import {IAuthor, IBook} from "../../LibraryTypes";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {addBook} from "../../redux/reducers/librarySlice";
 
 type BookSectionProps = {
   authors: IAuthor[];
@@ -14,17 +16,23 @@ type BookSectionProps = {
 const BookSection: React.FC<BookSectionProps>= (props) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const initBooks: IBook[] = []
-  const [books, setBooks] = useState<IBook[]>(initBooks);
+  //const [books, setBooks] = useState<IBook[]>(initBooks);
   const [updateBook, setUpdateBook] = useState<IBook | null>(null);
   const [updateIndex, setUpdateIndex] = useState<number | null>(null);
+
+  //apply redux
+  const dispatch = useAppDispatch();
+
+  const books: IBook[] = useAppSelector(state => state.library.books)
 
   const {authors } = props;
 
   const handleCreateBook = (newBook: IBook) => {
-    const allBooks: IBook[] = books.slice();
+/*    const allBooks: IBook[] = books.slice();
     allBooks.push(newBook);
-    setBooks(allBooks);
-    console.log("HandlkeCreateBook");
+    setBooks(allBooks);*/
+    dispatch(addBook(newBook));
+
   }
 
   const  handleOnAddButtonClick = () => {
@@ -36,9 +44,9 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
   }
 
   const onHandleBookDelete = (index: number) => {
-    const allBooks: IBook [] = books.slice();
+/*    const allBooks: IBook [] = books.slice();
     allBooks.splice(index, 1);
-    setBooks(allBooks);
+    setBooks(allBooks);*/
   }
 
   const onHandleBookEdit = (index: number) => {
@@ -53,9 +61,9 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
     }
     const allBooks: IBook[] = books.slice();
     allBooks.splice(updateIndex - 1, 1, newBook);
-    setBooks(allBooks);
-    setUpdateBook(null);
-    setUpdateIndex(null);
+    //setBooks(allBooks);
+    //setUpdateBook(null);
+    //setUpdateIndex(null);
    // addToast("Book Updated", { appearance: 'success', autoDismiss: true });
   };
 
@@ -67,9 +75,9 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
   };
 
   const handleOnBookDelete = (index: number) => {
-    const allBooks: IBook[] = books.slice();
-    allBooks.splice(index, 1);
-    setBooks(allBooks);
+  //  const allBooks: IBook[] = books.slice();
+  //  allBooks.splice(index, 1);
+  //  setBooks(allBooks);
    // addToast("Book Deleted", { appearance: 'success', autoDismiss: true });
   };
 

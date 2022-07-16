@@ -42,6 +42,7 @@ export const librarySlice = createSlice({
     addBook: (state, action:PayloadAction<IBook>) => {
       const newBooks = [...state.books, action.payload];
       state.books = newBooks;
+      console.log("Book add slice");
     }
   }
 });
