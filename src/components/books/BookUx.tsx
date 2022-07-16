@@ -37,8 +37,8 @@ const BookUx: React.FC<BookListProps> = (props) => {
         {ConditionalComponent()}
         <Col xs={12}  className="ms-md-2 ms-1"> {
           books.map((book: IBook, index: number) =>
-            <Book book={book} key={index} index={index} onDeleteBookClick={()=>onDeleteBookClick (index -1 )}
-            onEditBookClick={() => onEditAuthorClick (index -1 ) }/>
+            <Book book={book} key={index} index={index + 1} onDeleteBookClick={()=>onDeleteBookClick (index )}
+            onEditBookClick={() => onEditAuthorClick (index ) }/>
           )
         }
         </Col>

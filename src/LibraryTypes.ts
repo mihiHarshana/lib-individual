@@ -18,3 +18,9 @@ export interface UpdateAuthor {
   author: IAuthor;
   index: number;
 }
+
+export interface UpdateBook {
+  book: IBook;
+  index: number
+}
+

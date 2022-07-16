@@ -2,11 +2,11 @@ import {Row} from "react-bootstrap";
 import BookTitle from "./BookTitle";
 import BookUx from "./BookUx";
 import AddBook from "./AddBook";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import BookFormUx from "./BookFormUx";
-import {IAuthor, IBook} from "../../LibraryTypes";
+import {IAuthor, IBook, UpdateAuthor, UpdateBook} from "../../LibraryTypes";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {addBook} from "../../redux/reducers/librarySlice";
+import {addBook, bookIndex, deleteBook, updateBook1} from "../../redux/reducers/librarySlice";
 
 type BookSectionProps = {
   authors: IAuthor[];
@@ -24,18 +24,24 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
   const dispatch = useAppDispatch();
 
   const books: IBook[] = useAppSelector(state => state.library.books)
+  const tempBookIndex: number = useAppSelector( state => state.library.bookIndex )
 
   const {authors } = props;
+
 
   const handleCreateBook = (newBook: IBook) => {
 /*    const allBooks: IBook[] = books.slice();
     allBooks.push(newBook);
     setBooks(allBooks);*/
     dispatch(addBook(newBook));
+    dispatch(bookIndex(-1));
+
 
   }
 
   const  handleOnAddButtonClick = () => {
+    dispatch(bookIndex(-1))
+
     setIsFormVisible(true);
   }
 
@@ -47,24 +53,21 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
 /*    const allBooks: IBook [] = books.slice();
     allBooks.splice(index, 1);
     setBooks(allBooks);*/
+    dispatch(deleteBook(index));
+    dispatch(bookIndex(-1));
   }
 
   const onHandleBookEdit = (index: number) => {
-    console.log("printing books " + books[index + 1 ].name);
-    setUpdateBook(books[index+ 1]);
-    setUpdateIndex(index +1 );
+    dispatch(bookIndex(index))
+    setIsFormVisible(true);
   }
 
   const handleOnBookUpdate = (newBook: IBook) => {
-    if (!updateIndex) {
+    if (tempBookIndex === -1 ) {
       return;
     }
-    const allBooks: IBook[] = books.slice();
-    allBooks.splice(updateIndex - 1, 1, newBook);
-    //setBooks(allBooks);
-    //setUpdateBook(null);
-    //setUpdateIndex(null);
-   // addToast("Book Updated", { appearance: 'success', autoDismiss: true });
+    const updatedBook: UpdateBook = {book: newBook , index: tempBookIndex}
+    dispatch(updateBook1(updatedBook));
   };
 
   const handleOnBookUpdateSet = (index: number) => {

@@ -38,7 +38,6 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
   }*/
 
   const handleAuthorDelete = (index: number) => {
-    console.log("delete : " + tempAuthorIndex)
     dispatch(authorIndex(index));
     dispatch(deleteAuthor(tempAuthorIndex));
     dispatch(authorIndex(-1));

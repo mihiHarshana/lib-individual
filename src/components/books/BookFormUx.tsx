@@ -2,9 +2,10 @@ import React, {FormEvent, useEffect, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import Select from "react-select";
-import {AuthorDropDown, IAuthor, IBook} from "../../LibraryTypes";
+import {AuthorDropDown, IAuthor, IBook, UpdateBook} from "../../LibraryTypes";
 import Swal from "sweetalert2";
-
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {addBook, bookIndex, updateBook1} from "../../redux/reducers/librarySlice";
 
 type BookFormProps = {
   onCloseClick: () => void;
@@ -25,6 +26,22 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
   const [bookToUpdate, setBookToUpdate] = useState<string>("");
 
   const {isFormVisible,onCloseClick, updateBook , createBook, authorList, onBookUpdateSet, onBookUpdate} = props;
+
+  useEffect(() => {
+    if (tempBookIndex === -1) {
+      setBookName("");
+      setBookPrice("");
+      setBookAuthor(null);
+
+    }
+
+  }, [isFormVisible]);
+
+  //applying redux
+  const tempBooks: IBook[] = useAppSelector(state => state.library.books)
+  const tempBookIndex: number = useAppSelector( state => state.library.bookIndex )
+
+  const dispatch = useAppDispatch();
 
   const handleBookNameChange = (name: string) => {
     setBookName(name);
@@ -59,34 +76,57 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
     setBookAuthor(updateBookAuthor);
   }, [updateBook]);
 
+  useEffect(() => {
+    // Update the document title using the browser API
+    if (tempBookIndex === -1) {
+      return;
+    }
+    setBookName(tempBooks[tempBookIndex].name);
+    setBookPrice(tempBooks[tempBookIndex].price);
+    const updateBookAuthor: AuthorDropDown = {
+      value: tempBooks[tempBookIndex].author,
+      label: tempBooks[tempBookIndex].author,
+    };
+    setBookAuthor(updateBookAuthor);
+  },[tempBookIndex] );
+
   const handleBookCreate = (event: FormEvent) =>{
     console.log("Inistialtion handle book create")
    event.preventDefault();
     /*   if (updateBook === null) {
         return;
       }*/
-    console.log("Handle Book Create");
+
     if (!bookName || !bookPrice || !bookAuthor  ) {
       return;
-    } else if ( updateBook) {
-      const newBook:IBook =  {
-        name: bookName,
-        price: bookPrice,
-        author: bookAuthor.value,
-      }
-      onBookUpdate(newBook);
-      setBookName("");
-      setBookAuthor(null);
-      setBookPrice("");
-    } else {
+    } else if ( tempBookIndex === -1 ) {
       const newBook: IBook = {
         name: bookName,
         price: bookPrice,
         author: bookAuthor.value
       };
-      createBook(newBook);
+      dispatch(addBook(newBook));
+      dispatch(bookIndex(-1));
+      //createBook(newBook);
       setBookName("");
       setBookAuthor(null)
+      setBookPrice("");
+
+    } else {
+      const newBook:IBook =  {
+        name: bookName,
+        price: bookPrice,
+        author: bookAuthor.value,
+      }
+      const updateBook: UpdateBook = {
+        book: newBook,
+        index: tempBookIndex
+      }
+      dispatch(updateBook1(updateBook));
+      dispatch(bookIndex(-1));
+      //onBookUpdate(newBook);
+      setBookName("");
+      setBookAuthor(null);
       setBookPrice("");
     }
   }
@@ -97,14 +137,13 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
     )
   }
 
-
   return (
 
     (isFormVisible === true  ?
     <React.Fragment>
       <Row>
         <Col xs={8} md={9}  className="mt-3 ms-md-1">
-          <h3>{ (updateBook) ? 'Update' : 'Create'} Book</h3>
+          <h3>{ (tempBookIndex === -1) ? 'Create' : 'Update'} Book</h3>
         </Col>
         <Col xs={4} md={1}  className="mt-3 pe-md-3 text-end">
           <XCircle className="c-circle " onClick={onCloseClick}/>
@@ -148,7 +187,7 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="create-button float-end mt-3 px-4 py-1" >
-              { (updateBook) ? 'Update' : 'Create'}
+              { (tempBookIndex === -1) ? 'Create' : 'Update'}
             </Button>
           </Form>
         </Col>
