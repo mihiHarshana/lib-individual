@@ -6,7 +6,7 @@ import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
 import AddAuthor from "./AddAuthor";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {deleteAuthor, updateAuthor1, authorIndex} from "../../redux/reducers/librarySlice";
+import {authorIndex} from "../../redux/reducers/librarySlice";
 
 type AuthorSectionProps = {
   onAuthorListChange: (newAuthors: IAuthor[]) => void;  //remove this
@@ -15,9 +15,7 @@ type AuthorSectionProps = {
 const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
   const [updateAuthor, setUpdateAuthor] = useState<IAuthor | null>(null);
   const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
-
   const {onAuthorListChange} = props; //TODO: useAppselector
-
   const authors: IAuthor[] = useAppSelector(state => state.library.authors)
   const tempAuthorIndex: number = useAppSelector(state => state.library.authorIndex)
 
@@ -29,13 +27,6 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
 
   }, [authors]);
 
-  //TODO: move to delete button
-  const handleAuthorDelete = (index: number) => {
-    dispatch(authorIndex(index));
-    dispatch(deleteAuthor(tempAuthorIndex));
-    dispatch(authorIndex(-1));
- }
-
   const onHandleCloseClick = () => {
     setAuthorFormVisible(false);
   }
@@ -45,23 +36,13 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
     dispatch(authorIndex(-1))
   }
 
-  const onHandleEditClick = (index: number) => {
-    setAuthorFormVisible(true);
-    dispatch(authorIndex(index));
-  }
-
   return (
       <Row>
         <AuthorTitle />
-        <AuthorList onDeleteAuthorClick={handleAuthorDelete}
-                    onEditAuthorClick={onHandleEditClick}
-                    setFormVisible={setAuthorFormVisible}
-
-         />
-        <AddAuthor  onHandleAddClick={onHandleAddClick}/>
+        <AuthorList setFormVisible={setAuthorFormVisible} />
+        <AddAuthor onHandleAddClick={onHandleAddClick} />
         <Col xs={12} md={10}>
-          <AuthorForm
-                      isFormVisible={isAuthorFormVisible}
+          <AuthorForm isFormVisible={isAuthorFormVisible}
                       onHandleCloseClick={onHandleCloseClick}
                       updateAuthor={updateAuthor}
           />

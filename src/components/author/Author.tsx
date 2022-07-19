@@ -8,8 +8,6 @@ import {authorIndex, deleteAuthor} from "../../redux/reducers/librarySlice";
 
 type AuthorProps = {
   count: number;
-  onDeleteAuthorClick: (index: number) => void;
-  onEditAuthorClick: (index: number) => void;
   setFormVisible: (isFormVisible: boolean) => void;
 }
 
@@ -30,12 +28,12 @@ const Author: React.FC<AuthorProps> = (props) => {
         return;
       }
       dispatch(deleteAuthor(count - 1))
+      dispatch(authorIndex(-1));
     })
   }
-  const onHandleEditClick = (index: number) => {
-   // onEditAuthorClick(index);
-     setFormVisible(true);
 
+  const onHandleEditClick = (index: number) => {
+    setFormVisible(true);
     dispatch(authorIndex(index));
   }
 
