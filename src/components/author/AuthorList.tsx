@@ -2,16 +2,18 @@ import React, {useState} from "react";
 import {IAuthor} from "../../LibraryTypes";
 import {Col} from "react-bootstrap";
 import Author from "./Author";
+import {useAppSelector} from "../../redux/hooks";
 
 type AuthorListProps = {
-  authors: IAuthor[];
   onDeleteAuthorClick: (index: number) => void;
   onEditAuthorClick: (index: number) => void;
+  setFormVisible: (isFormVisible: boolean) => void;
 }
 
 const AuthorList: React.FC<AuthorListProps> = (props) => {
+  const authors: IAuthor[] = useAppSelector(state => state.library.authors)
 
-  const {authors, onDeleteAuthorClick, onEditAuthorClick} = props;
+  const {onDeleteAuthorClick, onEditAuthorClick, setFormVisible} = props;
 
   const ConditionalComponent = () => {
 
@@ -32,8 +34,9 @@ const AuthorList: React.FC<AuthorListProps> = (props) => {
         {
           authors.map((author: IAuthor, index: number) =>
             <li className="author my-2" key={index}>
-              <Author count={index + 1} author={author}
+              <Author count={index + 1}
                       onEditAuthorClick={onEditAuthorClick} onDeleteAuthorClick={onDeleteAuthorClick}
+                      setFormVisible={setFormVisible}
               />
             </li>
           )

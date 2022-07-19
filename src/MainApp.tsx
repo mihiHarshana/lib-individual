@@ -2,14 +2,10 @@ import React, {useState} from "react";
 import Welcome from "./components/welcomeux/Welcome";
 import {Col, Container, Row} from "react-bootstrap";
 import AuthorSection from "./components/author/AuthorSection";
-import BookUx from "./components/books/BookUx";
 import Footer from "./components/footer/Footer";
 import BookSection from "./components/books/BookSection";
 import {IAuthor} from "./LibraryTypes";
-import {useSelector} from "react-redux";
 import {useAppDispatch, useAppSelector} from "./redux/hooks";
-import {addAuthor} from "./redux/reducers/librarySlice";
-import Author from "./components/author/Author";
 
 const MainApp = () => {
 
@@ -17,14 +13,9 @@ const MainApp = () => {
     setAuthors(newAuthors);
   };
 
-
   const [authors, setAuthors] = useState<IAuthor[]>([]);
-
   const authorss = useAppSelector((state) => state.library.authors)
-  console.log("reducx --" + authorss);
-
   const dispatch  = useAppDispatch();
-
 
   return (
     <Container fluid>
@@ -45,4 +36,5 @@ const MainApp = () => {
     </Container>
   )
 }
+
 export default MainApp

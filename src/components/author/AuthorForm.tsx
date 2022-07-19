@@ -10,12 +10,11 @@ type AuthorFormUxProps = {
   isFormVisible: boolean;
   onHandleCloseClick:  () =>void;
   updateAuthor: IAuthor | null;
-  onAuthorUpdate: (author: IAuthor) =>void;
 }
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [authorName, setAuthorName] = useState<string>("");
-  const {isFormVisible, onHandleCloseClick, onAuthorUpdate, updateAuthor } = props;
+  const {isFormVisible, onHandleCloseClick, updateAuthor } = props;
 
   const tempAuthor: IAuthor [] = useAppSelector(state => state.library.authors)
   const tempAuthorIndex: number = useAppSelector(state => state.library.authorIndex)
@@ -50,7 +49,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     if (tempAuthorIndex !== -1) {
       let newAuthor:IAuthor;
       newAuthor = {name:authorName }
-      onAuthorUpdate(newAuthor);
+      //onAuthorUpdate(newAuthor);
       setAuthorName("");
       showMessage("Updated ", newAuthor.name)
 
@@ -84,7 +83,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
         <Row>
           <Col xs={12} md={10} className="pe-md-5">
             <Form className="mt-2 ms-md-5" onSubmit={handleAuthorCreate}>
-              <Form.Label className="author-label ">Name of the author</Form.Label>
+              <Form.Label className="author-label ">Name of the author </Form.Label>
               <Form.Control
                 type="text"
                 className="author-field mb-3"
@@ -103,7 +102,6 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
           </Col>
         </Row>
       </React.Fragment>
-
       : <React.Fragment />)
   )
 }

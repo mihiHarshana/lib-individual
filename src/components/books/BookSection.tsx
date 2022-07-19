@@ -49,6 +49,7 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
     setIsFormVisible(false);
   }
 
+  //TODO : move to Book
   const onHandleBookDelete = (index: number) => {
 /*    const allBooks: IBook [] = books.slice();
     allBooks.splice(index, 1);
@@ -61,7 +62,7 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
     dispatch(bookIndex(index))
     setIsFormVisible(true);
   }
-
+  // TODO: Remove from here.
   const handleOnBookUpdate = (newBook: IBook) => {
     if (tempBookIndex === -1 ) {
       return;
@@ -77,12 +78,14 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
 
   };
 
+/*
   const handleOnBookDelete = (index: number) => {
   //  const allBooks: IBook[] = books.slice();
   //  allBooks.splice(index, 1);
   //  setBooks(allBooks);
    // addToast("Book Deleted", { appearance: 'success', autoDismiss: true });
   };
+*/
 
   return (
     <Row>
@@ -94,7 +97,7 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
                   createBook={handleCreateBook}
                   updateBook={updateBook}
                   authorList={authors}
-                  deleteBook={handleOnBookDelete}
+                 // deleteBook={handleOnBookDelete}
                   onBookUpdateSet={handleOnBookUpdateSet}
                   onBookUpdate={handleOnBookUpdate}
 

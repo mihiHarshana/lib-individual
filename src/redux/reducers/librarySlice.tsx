@@ -27,8 +27,6 @@ export const librarySlice = createSlice({
         const newAuthor: IAuthor[] = state.authors.slice();
         newAuthor.splice(action.payload, 1);
         state.authors = newAuthor;
-      //const newAuthor: IAuthor [] = state.authors.splice(action.payload, 1);
-      //state.authors = newAuthor;
     },
 
     updateAuthor1: (state, action:PayloadAction<UpdateAuthor>) => {

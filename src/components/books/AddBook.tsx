@@ -1,6 +1,7 @@
 import React from "react";
 import {Col} from "react-bootstrap";
 import {Plus} from "react-feather";
+import {bookIndex} from "../../redux/reducers/librarySlice";
 
 type AddBookProps = {
   onAddClick: () => void;

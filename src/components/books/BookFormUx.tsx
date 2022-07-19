@@ -13,7 +13,7 @@ type BookFormProps = {
   createBook: (book: IBook) =>void;
   updateBook: IBook | null;
   authorList: IAuthor[];
-  deleteBook: (index: number) => void;
+  //deleteBook: (index: number) => void;
   onBookUpdateSet: (index: number ) => void;
   onBookUpdate: (newBook: IBook) => void;
 }

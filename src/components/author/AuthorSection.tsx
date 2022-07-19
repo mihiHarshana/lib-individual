@@ -9,17 +9,14 @@ import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {deleteAuthor, updateAuthor1, authorIndex} from "../../redux/reducers/librarySlice";
 
 type AuthorSectionProps = {
-  onAuthorListChange: (newAuthors: IAuthor[]) => void;
+  onAuthorListChange: (newAuthors: IAuthor[]) => void;  //remove this
 }
 
 const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
-  const initAuthors: IAuthor[] = []
-  //const [authors, setAuthors] = useState<IAuthor[]>(initAuthors);
   const [updateAuthor, setUpdateAuthor] = useState<IAuthor | null>(null);
   const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
- // const [updateIndex, setUpdateIndex] = useState<number | null>(null);
 
-  const {onAuthorListChange} = props;
+  const {onAuthorListChange} = props; //TODO: useAppselector
 
   const authors: IAuthor[] = useAppSelector(state => state.library.authors)
   const tempAuthorIndex: number = useAppSelector(state => state.library.authorIndex)
@@ -32,11 +29,7 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
 
   }, [authors]);
 
-
-/*  const handleCreateAuthor = (newAuthor: IAuthor) => {
-     dispatch(addAuthor(newAuthor));
-  }*/
-
+  //TODO: move to delete button
   const handleAuthorDelete = (index: number) => {
     dispatch(authorIndex(index));
     dispatch(deleteAuthor(tempAuthorIndex));
@@ -49,46 +42,28 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
 
   const onHandleAddClick = () => {
     setAuthorFormVisible(true);
-   // setUpdateAuthor(null);
-   // setUpdateIndex(null);
     dispatch(authorIndex(-1))
   }
 
   const onHandleEditClick = (index: number) => {
-   // setUpdateAuthor(authors[index]);
-   // setUpdateIndex(index);
     setAuthorFormVisible(true);
     dispatch(authorIndex(index));
-  }
-
-  const handleUpdateAuthor = (newAuthor: IAuthor) => {
-
-    if (tempAuthorIndex === -1) {
-      return;
-    }
-    const updatedAuthor: UpdateAuthor = {author: newAuthor , index: tempAuthorIndex}
-    dispatch(updateAuthor1(updatedAuthor));
-    dispatch(authorIndex(-1))
   }
 
   return (
       <Row>
         <AuthorTitle />
-        <AuthorList authors={authors} onDeleteAuthorClick={handleAuthorDelete}
-                    onEditAuthorClick={onHandleEditClick}/>
+        <AuthorList onDeleteAuthorClick={handleAuthorDelete}
+                    onEditAuthorClick={onHandleEditClick}
+                    setFormVisible={setAuthorFormVisible}
+
+         />
         <AddAuthor  onHandleAddClick={onHandleAddClick}/>
         <Col xs={12} md={10}>
-{/*          <AuthorForm createAuthor={handleCreateAuthor}
-                      isFormVisible={isAuthorFormVisible}
-                      onHandleCloseClick={onHandleCloseClick}
-                      updateAuthor={updateAuthor}
-                      onAuthorUpdate={handleUpdateAuthor}*/}
-
           <AuthorForm
                       isFormVisible={isAuthorFormVisible}
                       onHandleCloseClick={onHandleCloseClick}
                       updateAuthor={updateAuthor}
-                      onAuthorUpdate={handleUpdateAuthor}
           />
         </Col>
       </Row>
