@@ -1,23 +1,24 @@
 import React, {FormEvent, useEffect, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
-import {IAuthor} from "../../LibraryTypes";
+import {IAuthor, UpdateAuthor} from "../../LibraryTypes";
 import Swal from "sweetalert2";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {addAuthor} from "../../redux/reducers/librarySlice";
+import {addAuthor, updateAuthor1} from "../../redux/reducers/librarySlice";
 
 type AuthorFormUxProps = {
   isFormVisible: boolean;
   onHandleCloseClick:  () =>void;
-  updateAuthor: IAuthor | null;
+//  updateAuthor: IAuthor | null;
 }
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const [authorName, setAuthorName] = useState<string>("");
-  const {isFormVisible, onHandleCloseClick, updateAuthor } = props;
+  const {isFormVisible, onHandleCloseClick} = props;
 
-  const tempAuthor: IAuthor [] = useAppSelector(state => state.library.authors)
-  const tempAuthorIndex: number = useAppSelector(state => state.library.authorIndex)
+  const tempAuthor: IAuthor [] = useAppSelector(state => state.library.authors);
+  const tempAuthorIndex: number = useAppSelector(state => state.library.authorIndex);
+  const updateAuthor = tempAuthor[tempAuthorIndex];
   //Applying redux
   const dispatch = useAppDispatch();
 
@@ -49,6 +50,9 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     if (tempAuthorIndex !== -1) {
       let newAuthor:IAuthor;
       newAuthor = {name:authorName }
+      let updatedAuthor: UpdateAuthor;
+      updatedAuthor={author: newAuthor, index: tempAuthorIndex}
+      dispatch(updateAuthor1(updatedAuthor));
       setAuthorName("");
       showMessage("Updated ", newAuthor.name)
 

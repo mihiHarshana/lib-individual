@@ -13,7 +13,7 @@ type AuthorSectionProps = {
 }
 
 const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
-  const [updateAuthor, setUpdateAuthor] = useState<IAuthor | null>(null);
+ // const [updateAuthor, setUpdateAuthor] = useState<IAuthor | null>(null);
   const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
   const {onAuthorListChange} = props; //TODO: useAppselector
   const authors: IAuthor[] = useAppSelector(state => state.library.authors)
@@ -43,7 +43,7 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
         <Col xs={12} md={10}>
           <AuthorForm isFormVisible={isAuthorFormVisible}
                       onHandleCloseClick={onHandleCloseClick}
-                      updateAuthor={updateAuthor}
+                     // updateAuthor={authors[tempAuthorIndex]}
           />
         </Col>
       </Row>
