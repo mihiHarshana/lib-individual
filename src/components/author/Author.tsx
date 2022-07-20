@@ -17,6 +17,7 @@ const Author: React.FC<AuthorProps> = (props) => {
   const dispatch = useAppDispatch();
   const tempAuthor: IAuthor[] = useAppSelector(state => state.library.authors);
 
+
   const onHandleDeleteClick = (index: number) => {
     Swal.fire({
       title: 'Do you want to delete the author - ' + tempAuthor[count - 1].name + ' ? ',

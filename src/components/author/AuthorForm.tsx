@@ -4,12 +4,11 @@ import {XCircle} from "react-feather";
 import {IAuthor, UpdateAuthor} from "../../LibraryTypes";
 import Swal from "sweetalert2";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {addAuthor, updateAuthor1} from "../../redux/reducers/librarySlice";
+import {addAuthor, authorIndex, updateAuthor1} from "../../redux/reducers/librarySlice";
 
 type AuthorFormUxProps = {
   isFormVisible: boolean;
   onHandleCloseClick:  () =>void;
-//  updateAuthor: IAuthor | null;
 }
 
 const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
@@ -19,11 +18,10 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   const tempAuthor: IAuthor [] = useAppSelector(state => state.library.authors);
   const tempAuthorIndex: number = useAppSelector(state => state.library.authorIndex);
   const updateAuthor = tempAuthor[tempAuthorIndex];
-  //Applying redux
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Update the document title using the browser API
     if (!updateAuthor) {
       return;
     }
@@ -31,7 +29,6 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
   },[updateAuthor] );
 
   useEffect(() => {
-    // Update the document title using the browser API
     if (tempAuthorIndex === -1) {
       return;
     }
@@ -53,6 +50,7 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
       let updatedAuthor: UpdateAuthor;
       updatedAuthor={author: newAuthor, index: tempAuthorIndex}
       dispatch(updateAuthor1(updatedAuthor));
+      dispatch(authorIndex(-1));
       setAuthorName("");
       showMessage("Updated ", newAuthor.name)
 
