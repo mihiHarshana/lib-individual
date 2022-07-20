@@ -9,13 +9,11 @@ import {bookIndex, deleteBook} from "../../redux/reducers/librarySlice";
 type BookProps = {
   book: IBook;
   index: number;
- // onDeleteBookClick: (index: number) => void;
- // onEditBookClick: (index: number) => void
+  setFormVisible: (isFormVisible: boolean) => void;
 }
 const Book: React.FC<BookProps> = (props) => {
-  const {index, book} = props;
+  const {index, book, setFormVisible} = props;
   const dispatch = useAppDispatch();
-  const tempBookIndex: number = useAppSelector( state => state.library.bookIndex )
 
   const onhandleDeleteClick = (index: number) => {
     Swal.fire({
@@ -33,9 +31,8 @@ const Book: React.FC<BookProps> = (props) => {
   }
 
   const onHandleEditClick = (index: number) => {
-  //  onEditBookClick(index);
     dispatch(bookIndex(index));
-
+    setFormVisible(true);
   }
 
   return (

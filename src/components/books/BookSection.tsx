@@ -10,13 +10,11 @@ import {addBook, bookIndex, deleteBook, updateBook1} from "../../redux/reducers/
 
 type BookSectionProps = {
   authors: IAuthor[];
- // onBookListChange: (newBooks: IBook[]) => void;
 };
 
 const BookSection: React.FC<BookSectionProps>= (props) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const initBooks: IBook[] = []
-  //const [books, setBooks] = useState<IBook[]>(initBooks);
   const [updateBook, setUpdateBook] = useState<IBook | null>(null);
   const [updateIndex, setUpdateIndex] = useState<number | null>(null);
 
@@ -28,20 +26,8 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
 
   const {authors } = props;
 
-
-  const handleCreateBook = (newBook: IBook) => {
-/*    const allBooks: IBook[] = books.slice();
-    allBooks.push(newBook);
-    setBooks(allBooks);*/
-    dispatch(addBook(newBook));
-    dispatch(bookIndex(-1));
-
-
-  }
-
-  const  handleOnAddButtonClick = () => {
+  const handleOnAddButtonClick = () => {
     dispatch(bookIndex(-1))
-
     setIsFormVisible(true);
   }
 
@@ -49,19 +35,6 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
     setIsFormVisible(false);
   }
 
-  //TODO : move to Book
-  const onHandleBookDelete = (index: number) => {
-/*    const allBooks: IBook [] = books.slice();
-    allBooks.splice(index, 1);
-    setBooks(allBooks);*/
-    dispatch(deleteBook(index));
-    dispatch(bookIndex(-1));
-  }
-
-  const onHandleBookEdit = (index: number) => {
-    dispatch(bookIndex(index))
-    setIsFormVisible(true);
-  }
   // TODO: Remove from here.
   const handleOnBookUpdate = (newBook: IBook) => {
     if (tempBookIndex === -1 ) {
@@ -75,15 +48,13 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
     setUpdateIndex(index + 1);
     setUpdateBook(books[index]);
     setIsFormVisible(true);
-
   };
 
   return (
     <Row>
       <BookTitle />
       <BookUx books={books}
-              //onDeleteBookClick={onHandleBookDelete}
-              //onEditAuthorClick={onHandleBookEdit}
+              setFormVisible={setIsFormVisible}
       />
       <AddBook onAddClick={handleOnAddButtonClick} />
       <BookFormUx onCloseClick={onHandleCloseClick}

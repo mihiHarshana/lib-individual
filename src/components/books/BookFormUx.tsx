@@ -20,10 +20,7 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
   const [bookName, setBookName] = useState<string>("");
   const [bookPrice, setBookPrice] = useState<string>("");
   const [bookAuthor, setBookAuthor] = useState<AuthorDropDown | null>(null);
-
- // const [bookToUpdate, setBookToUpdate] = useState<string>("");
-
-  const {isFormVisible,onCloseClick, updateBook , authorList, onBookUpdateSet, onBookUpdate} = props;
+  const {isFormVisible,onCloseClick, updateBook , authorList} = props;
 
 
   useEffect(() => {

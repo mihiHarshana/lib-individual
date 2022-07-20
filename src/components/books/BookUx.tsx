@@ -2,22 +2,15 @@ import React, {useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import Book from "./Book";
 import {IBook,IAuthor} from "../../LibraryTypes";
-import {Plus} from "react-feather";
-import BookFormUx from "./BookFormUx";
-import AddBook from "./AddBook";
 
 type BookListProps = {
   books: IBook[];
-/*  onDeleteBookClick: (index: number) => void;
-  onEditAuthorClick: (index: number) => void;*/
+  setFormVisible: (isFormVisible: boolean) => void;
 }
 
 const BookUx: React.FC<BookListProps> = (props) => {
-  const [isFormVisible, setIsFormVisible] = useState(false);
 
-
-
-  const {books } = props;
+  const {books,setFormVisible } = props;
 
   const ConditionalComponent = () => {
     const div = books.length === 0 ?
@@ -30,7 +23,6 @@ const BookUx: React.FC<BookListProps> = (props) => {
     )
   }
 
-
   return (
     <React.Fragment>
       <Row>
@@ -38,8 +30,7 @@ const BookUx: React.FC<BookListProps> = (props) => {
         <Col xs={12}  className="ms-md-2 ms-1"> {
           books.map((book: IBook, index: number) =>
             <Book book={book} key={index} index={index + 1}
-                //  onDeleteBookClick={()=>onDeleteBookClick (index )}
-           // onEditBookClick={() => onEditAuthorClick (index ) }
+                  setFormVisible={setFormVisible}
           />
           )
         }
