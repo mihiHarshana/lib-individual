@@ -78,29 +78,20 @@ const BookSection: React.FC<BookSectionProps>= (props) => {
 
   };
 
-/*
-  const handleOnBookDelete = (index: number) => {
-  //  const allBooks: IBook[] = books.slice();
-  //  allBooks.splice(index, 1);
-  //  setBooks(allBooks);
-   // addToast("Book Deleted", { appearance: 'success', autoDismiss: true });
-  };
-*/
-
   return (
     <Row>
       <BookTitle />
-      <BookUx books={books} onDeleteBookClick={onHandleBookDelete} onEditAuthorClick={onHandleBookEdit}/>
+      <BookUx books={books}
+              //onDeleteBookClick={onHandleBookDelete}
+              //onEditAuthorClick={onHandleBookEdit}
+      />
       <AddBook onAddClick={handleOnAddButtonClick} />
       <BookFormUx onCloseClick={onHandleCloseClick}
                   isFormVisible={isFormVisible}
-                  createBook={handleCreateBook}
                   updateBook={updateBook}
                   authorList={authors}
-                 // deleteBook={handleOnBookDelete}
                   onBookUpdateSet={handleOnBookUpdateSet}
                   onBookUpdate={handleOnBookUpdate}
-
       />
     </Row>
   )

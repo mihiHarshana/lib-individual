@@ -10,10 +10,8 @@ import {addBook, bookIndex, updateBook1} from "../../redux/reducers/librarySlice
 type BookFormProps = {
   onCloseClick: () => void;
   isFormVisible: boolean;
-  createBook: (book: IBook) =>void;
   updateBook: IBook | null;
   authorList: IAuthor[];
-  //deleteBook: (index: number) => void;
   onBookUpdateSet: (index: number ) => void;
   onBookUpdate: (newBook: IBook) => void;
 }
@@ -23,18 +21,17 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
   const [bookPrice, setBookPrice] = useState<string>("");
   const [bookAuthor, setBookAuthor] = useState<AuthorDropDown | null>(null);
 
-  const [bookToUpdate, setBookToUpdate] = useState<string>("");
+ // const [bookToUpdate, setBookToUpdate] = useState<string>("");
 
-  const {isFormVisible,onCloseClick, updateBook , createBook, authorList, onBookUpdateSet, onBookUpdate} = props;
+  const {isFormVisible,onCloseClick, updateBook , authorList, onBookUpdateSet, onBookUpdate} = props;
+
 
   useEffect(() => {
     if (tempBookIndex === -1) {
       setBookName("");
       setBookPrice("");
       setBookAuthor(null);
-
     }
-
   }, [isFormVisible]);
 
   //applying redux
@@ -51,7 +48,6 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
   }
 
   const authors = authorList.map((author: IAuthor) => {
-    console.log(author.name);
     return {value: author.name, label: author.name}
   });
 
@@ -60,7 +56,6 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
       return;
     }
     setBookAuthor(author);
-  //  setBookAuthorValid("yes");
   };
 
   useEffect(() => {
@@ -91,12 +86,7 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
   },[tempBookIndex] );
 
   const handleBookCreate = (event: FormEvent) =>{
-    console.log("Inistialtion handle book create")
-   event.preventDefault();
-    /*   if (updateBook === null) {
-        return;
-      }*/
-
+    event.preventDefault();
     if (!bookName || !bookPrice || !bookAuthor  ) {
       return;
     } else if ( tempBookIndex === -1 ) {
@@ -107,7 +97,6 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
       };
       dispatch(addBook(newBook));
       dispatch(bookIndex(-1));
-      //createBook(newBook);
       setBookName("");
       setBookAuthor(null)
       setBookPrice("");
@@ -124,7 +113,6 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
       }
       dispatch(updateBook1(updateBook));
       dispatch(bookIndex(-1));
-      //onBookUpdate(newBook);
       setBookName("");
       setBookAuthor(null);
       setBookPrice("");

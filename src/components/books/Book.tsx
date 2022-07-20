@@ -3,15 +3,19 @@ import {Col, Row} from "react-bootstrap";
 import {Edit, Edit2, Plus, Trash2} from "react-feather";
 import {IBook} from "../../LibraryTypes";
 import Swal from 'sweetalert2'
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {bookIndex, deleteBook} from "../../redux/reducers/librarySlice";
 
 type BookProps = {
   book: IBook;
   index: number;
-  onDeleteBookClick: (index: number) => void;
-  onEditBookClick: (index: number) => void
+ // onDeleteBookClick: (index: number) => void;
+ // onEditBookClick: (index: number) => void
 }
 const Book: React.FC<BookProps> = (props) => {
-  const {index, onDeleteBookClick, book, onEditBookClick} = props;
+  const {index, book} = props;
+  const dispatch = useAppDispatch();
+  const tempBookIndex: number = useAppSelector( state => state.library.bookIndex )
 
   const onhandleDeleteClick = (index: number) => {
     Swal.fire({
@@ -23,15 +27,16 @@ const Book: React.FC<BookProps> = (props) => {
       if (!result.isConfirmed) {
         return;
       }
-      onDeleteBookClick(index - 1);
+      dispatch(deleteBook(index - 1));
+      dispatch(bookIndex(index  -1));
     })
   }
 
   const onHandleEditClick = (index: number) => {
-    console.log("books.tsx - onHandleEditClick")
-    onEditBookClick(index);
-  }
+  //  onEditBookClick(index);
+    dispatch(bookIndex(index));
 
+  }
 
   return (
     <React.Fragment>

@@ -9,7 +9,7 @@ import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {authorIndex} from "../../redux/reducers/librarySlice";
 
 type AuthorSectionProps = {
-  onAuthorListChange: (newAuthors: IAuthor[]) => void;  //remove this
+  onAuthorListChange: (newAuthors: IAuthor[]) => void;  //TODO: remove this
 }
 
 const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
