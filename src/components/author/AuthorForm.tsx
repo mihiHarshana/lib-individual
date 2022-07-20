@@ -49,7 +49,6 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
     if (tempAuthorIndex !== -1) {
       let newAuthor:IAuthor;
       newAuthor = {name:authorName }
-      //onAuthorUpdate(newAuthor);
       setAuthorName("");
       showMessage("Updated ", newAuthor.name)
 

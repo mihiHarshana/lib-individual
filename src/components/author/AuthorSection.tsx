@@ -24,7 +24,6 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
 
   useEffect(() => {
     onAuthorListChange(authors)
-
   }, [authors]);
 
   const onHandleCloseClick = () => {
