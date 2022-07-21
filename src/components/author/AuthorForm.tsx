@@ -2,7 +2,6 @@ import React, {FormEvent, useEffect, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor, UpdateAuthor} from "../../LibraryTypes";
-import Swal from "sweetalert2";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {addAuthor, authorIndex, updateAuthor1} from "../../redux/reducers/librarySlice";
 
@@ -52,22 +51,12 @@ const AuthorForm: React.FC<AuthorFormUxProps> = (props) => {
       dispatch(updateAuthor1(updatedAuthor));
       dispatch(authorIndex(-1));
       setAuthorName("");
-      showMessage("Updated ", newAuthor.name)
-
     } else {
       let newAuthor:IAuthor;
       newAuthor = {name:authorName  }
       dispatch(addAuthor(newAuthor));
       setAuthorName("");
-      showMessage("Created ", newAuthor.name)
     }
-  }
-
-  const showMessage = (message: string, authorname: string) => {
-    Swal.fire(
-      'Author ' + authorname +  ' '  +  message + 'successfully ',
-      'success'
-    )
   }
 
   return (
