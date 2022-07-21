@@ -2,15 +2,16 @@ import React, {useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import Book from "./Book";
 import {IBook,IAuthor} from "../../LibraryTypes";
+import {useAppSelector} from "../../redux/hooks";
 
 type BookListProps = {
-  books: IBook[];
   setFormVisible: (isFormVisible: boolean) => void;
 }
 
 const BookUx: React.FC<BookListProps> = (props) => {
 
-  const {books,setFormVisible } = props;
+  const {setFormVisible } = props;
+  const books: IBook[] =  useAppSelector(state => state.library.books);
 
   const ConditionalComponent = () => {
     const div = books.length === 0 ?

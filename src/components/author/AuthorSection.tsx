@@ -8,20 +8,9 @@ import AddAuthor from "./AddAuthor";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {authorIndex} from "../../redux/reducers/librarySlice";
 
-type AuthorSectionProps = {
-  onAuthorListChange: (newAuthors: IAuthor[]) => void;  //TODO: remove this
-}
-
-const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
+const AuthorSection: React.FC = () => {
   const [isAuthorFormVisible,  setAuthorFormVisible] = useState(false);
-  const {onAuthorListChange} = props; //TODO: useAppselector
-  const authors: IAuthor[] = useAppSelector(state => state.library.authors)
-
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    onAuthorListChange(authors)
-  }, [authors]);
 
   const onHandleCloseClick = () => {
     setAuthorFormVisible(false);

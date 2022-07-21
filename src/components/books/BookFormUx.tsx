@@ -3,24 +3,19 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import Select from "react-select";
 import {AuthorDropDown, IAuthor, IBook, UpdateBook} from "../../LibraryTypes";
-import Swal from "sweetalert2";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {addBook, bookIndex, updateBook1} from "../../redux/reducers/librarySlice";
 
 type BookFormProps = {
   onCloseClick: () => void;
   isFormVisible: boolean;
-  updateBook: IBook | null;
-  authorList: IAuthor[];
-  onBookUpdateSet: (index: number ) => void;
-  onBookUpdate: (newBook: IBook) => void;
 }
 
 const BookFormUx: React.FC<BookFormProps> = (props) => {
   const [bookName, setBookName] = useState<string>("");
   const [bookPrice, setBookPrice] = useState<string>("");
   const [bookAuthor, setBookAuthor] = useState<AuthorDropDown | null>(null);
-  const {isFormVisible,onCloseClick, updateBook , authorList} = props;
+  const {isFormVisible,onCloseClick } = props;
 
 
   useEffect(() => {
@@ -32,8 +27,9 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
   }, [isFormVisible]);
 
   //applying redux
-  const tempBooks: IBook[] = useAppSelector(state => state.library.books)
-  const tempBookIndex: number = useAppSelector( state => state.library.bookIndex )
+  const tempBooks: IBook[] = useAppSelector(state => state.library.books);
+  const tempBookIndex: number = useAppSelector( state => state.library.bookIndex );
+  const authorList: IAuthor[] = useAppSelector(state => state.library.authors);
 
   const dispatch = useAppDispatch();
 
@@ -56,20 +52,19 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
   };
 
   useEffect(() => {
-    if (!updateBook) {
+    if (tempBookIndex == -1) {
       return;
     }
     const updateBookAuthor: AuthorDropDown = {
-      value: updateBook.author,
-      label: updateBook.author,
+      value: tempBooks[tempBookIndex].author,
+      label: tempBooks[tempBookIndex].author,
     };
-    setBookName(updateBook.name);
-    setBookPrice(updateBook.price);
+    setBookName(tempBooks[tempBookIndex].name);
+    setBookPrice(tempBooks[tempBookIndex].price);
     setBookAuthor(updateBookAuthor);
-  }, [updateBook]);
+  }, [tempBookIndex]);
 
   useEffect(() => {
-    // Update the document title using the browser API
     if (tempBookIndex === -1) {
       return;
     }
@@ -97,7 +92,6 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
       setBookName("");
       setBookAuthor(null)
       setBookPrice("");
-
     } else {
       const newBook:IBook =  {
         name: bookName,
@@ -116,16 +110,7 @@ const BookFormUx: React.FC<BookFormProps> = (props) => {
     }
   }
 
-/*
-  const showMessage = (message: string, authorname: string) => {
-    Swal.fire(
-      'success'
-    )
-  }
-*/
-
   return (
-
     (isFormVisible === true  ?
     <React.Fragment>
       <Row>
